@@ -525,12 +525,6 @@ img {
     height: 100%;
 }
 
-.eWZHfu.button {
-    color: rgb(245, 246, 247);
-    box-shadow: rgba(29, 34, 37, 0.1) 0px 4px 8px 0px;
-    background-color: rgb(88, 26, 196);
-    background-image: conic-gradient(from 1turn, rgb(88, 26, 196), rgb(119, 60, 253));
-}
 
 .cBmlor.button-big {
     height: 3.625rem;
@@ -767,12 +761,7 @@ input:-webkit-autofill {
 .cBmlor.button-big {
     height: 3.625rem;
 }
-.eWZHfu.button {
-    color: rgb(245, 246, 247);
-    box-shadow: rgba(29, 34, 37, 0.1) 0px 4px 8px 0px;
-    background-color: rgb(88, 26, 196);
-    background-image: conic-gradient(from 1turn, rgb(88, 26, 196), rgb(119, 60, 253));
-}
+
 .jBwyNM .buttons .button:first-of-type {
     width: 11rem;
     flex: 0 0 auto;

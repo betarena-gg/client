@@ -211,7 +211,7 @@ function formatTime(timestamp) {
 </script>
 
 <svelte:body on:keypress={()=> handleSendMessage(event, {newMessages, type: "normal"})} />
-<div id="main" class="sc-cVAmsi bJUiGv" style="transform: none;">
+<div id="main-screen" class="sc-cVAmsi bJUiGv" style="transform: none;">
     <div class="sc-ewSTlh hHMWvP" id="public-chat">
         <div class="sc-hJZKUC dWgZek">
             <div class="select-wrap">

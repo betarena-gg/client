@@ -197,7 +197,7 @@
 
 <!-- =========================== mobile ================================= -->
 
-<div class="mobile">
+<div id="mobile-screen">
     <div class="sc-bkkeKt kBjSXI" style="background-color: transparent;">
         <div class="dialog sc-dkqQuH ikQOCU">
             <div class="dialog-head has-close">

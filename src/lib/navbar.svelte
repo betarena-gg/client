@@ -18,6 +18,8 @@
   import { createEventDispatcher } from "svelte";
   import { handleNestedRoute } from "$lib/store/nested_routes";
   import { goto } from "$app/navigation"
+    import Coins from "./profilecomponent/main/coins.svelte";
+    import Navprofile from "./profilecomponent/main/navprofile.svelte";
   $: browser && localStorage.setItem("preload", JSON.stringify("is_active"));
   const dispatch = createEventDispatcher();
   const handleChat = (e) => {
@@ -56,6 +58,9 @@
       newScreen = $screen - 600
     }
   }
+
+  $: coinsEL = false
+  $: profileNAV = false
 
 </script>
 
@@ -106,7 +111,7 @@
       <div class="sc-DtmNo euzHLF right">
         <div class="sc-gjNHFA juteh wallet-enter">
           <div class="sc-fmciRz LQlWw">
-            <div class="sc-iFMAIt icGouR">
+            <button on:click={()=> coinsEL =! coinsEL} class="sc-iFMAIt icGouR">
               <div class="sc-eXlEPa boxpOO">
                 <img class="coin-icon" alt="" src={$default_Wallet.coin_image}>
                 <span class="currency">{$default_Wallet.coin_name}</span>
@@ -117,7 +122,11 @@
                   <span class="amount-str">{(parseFloat($default_Wallet.balance)).toFixed(6)}</span>
                 </div>
               </div>
-            </div>
+            </button>
+            {#if coinsEL}
+              <Coins on:coinDefault={()=> coinsEL =! coinsEL} />
+            {/if}
+           
             <button class="sc-iqseJM sc-bqiRlB cBmlor eWZHfu button button-normal sc-iqVWFU fGPfpD">
               <div class="button-inner">
                 <Icon src={IoWallet} size="18" color="#ffff" className="custom-icon" />
@@ -131,12 +140,15 @@
             <a href={`/user/profile/${$profileStore.user_id}`}>
               <img class="avatar " alt="" src={$profileStore.profile_image}>
             </a>
-            <div class="svg">
+            <button on:mouseenter={()=> profileNAV = true} on:mouseleave={()=> profileNAV = false} class="svg">
               <Icon src={AiOutlineMenuUnfold} size="23" color={"rgba(153, 164, 176, 0.8)"} className="custom-icon" />
-            </div>
+            </button>
           </div>
+          {#if profileNAV}
+            <Navprofile />
+          {/if}
         </div>
-        <button class="sc-dcgwPl bbYXSv private-chat">
+        <!-- <button class="sc-dcgwPl bbYXSv private-chat">
           <Icon src={HiSolidMail} size="23" color={"rgba(153, 164, 176, 0.8)"} className="custom-icon" />
         </button>
         <button id="notice" class="sc-ksHpcM kultDa notice">
@@ -144,7 +156,7 @@
             <Icon src={IoNotificationsSharp} size="23" color={"rgba(153, 164, 176, 0.8)"} className="custom-icon" />
             <div class="sc-fotOHu gGSOuF badge ">1</div>
           </div>
-        </button>
+        </button> -->
         <button id="chat" class="sc-eicpiI PGOpB">
           <button on:click={handleChat} class="chat-btn ">
             <Icon src={BsPlayFill} size="29" color={"rgba(153, 164, 176, 0.8)"} className="custom-icon" />
@@ -162,7 +174,7 @@
       <div class="logo-wrap">
         <img alt="logo" src="https://res.cloudinary.com/dxwhz3r81/image/upload/v1704517117/logoshort_dey3mt.png">
       </div>
-      <button class="sc-bQtKYq cUTdQJ">
+      <button on:click={handleMenu} class="sc-bQtKYq cUTdQJ">
         <span class="open-wrap">
           <Icon src={FiMenu}  size="12"   color="#fff"  />
         </span>
@@ -176,7 +188,7 @@
         </div>
         {:else}
         <div class="sc-gjNHFA jlttqa wallet-enter">
-          <div class="sc-fmciRz LQlWw">
+          <button on:click={()=> coinsEL =! coinsEL} class="sc-fmciRz LQlWw">
             <div class="sc-iFMAIt icGouR">
               <div class="sc-eXlEPa boxpOO">
                 <img class="coin-icon" alt="" src={$default_Wallet.coin_image}>
@@ -195,17 +207,24 @@
                 <span>Wallet</span>
               </div>
             </button>
-          </div>
+          </button>
+          {#if coinsEL}
+            <Coins on:coinDefault={()=> coinsEL =! coinsEL}/>
+          {/if}
         </div>
          <div class="sc-gnnDb fhlUmF">
-              <div class="user-wrap">
+              <div  class="user-wrap">
                 <a href={`/user/profile/${$profileStore.user_id}`}>
                   <img class="avatar " alt="" src={$profileStore.profile_image}>
                 </a>
-                <div class="svg">
+                <button on:click={()=> profileNAV =! profileNAV} class="svg">
                   <Icon src={AiOutlineMenuUnfold} size="23" color={"rgba(153, 164, 176, 0.8)"} className="custom-icon" />
-                </div>
+                </button>
               </div>
+              {#if profileNAV}
+                <Navprofile />
+              {/if}
+              
             </div>
       {/if}
 

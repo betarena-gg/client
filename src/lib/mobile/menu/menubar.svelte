@@ -56,7 +56,7 @@ const handleNavigation = ((e) => {
 
         <button class="nav-item" on:click={handleOriginals}>
                 <img alt="menu-icon" src="https://static.nanogames.io/assets/originalcasino.bb7966a7.png">
-                <div class="nav-right">NG Originals</div>
+                <div class="nav-right">BA Originals</div>
                 <Icon src={RiSystemArrowRightSLine} color="rgba(153, 164, 176, 0.6)" size="27" className="sc-gsDKAQ hxODWG icon open-icon open" title="Custom icon params" />
         </button>
 
@@ -65,12 +65,6 @@ const handleNavigation = ((e) => {
             <Games on:dipla={handleGames} />
         {/if}
 
-        <button on:click={()=>handleNavigation("/bonus")}  class="nav-item">
-            <span style="padding: 10px">
-                <Icon src={AiFillGift}  size="25"  color="#9900CC" className="custom-icon" title="bonus" />
-            </span>
-            <div class="nav-right">Bonus</div>
-        </button>
         <button on:click={()=>handleNavigation("/lottery")}  class="nav-item">
             <img alt="menu-icon" src="https://static.nanogames.io/assets/lottery.bc95b607.png">
             <div class="nav-right">Lottery</div>
@@ -158,11 +152,4 @@ const handleNavigation = ((e) => {
     width: 100%;
     position: fixed;
 }
-/* .mobile-sidebar-top-tab{
-    width: 100%;
-    height: 40px;
-    position: fixed;
-    background-color: rgb(36, 38, 43);
-    z-index: 56;
-} */
 </style>

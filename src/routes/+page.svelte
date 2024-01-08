@@ -281,7 +281,7 @@ register();
         <div class="sc-jYmNlR jjBLrt sc-emDsmM CqKVI">
             <div class="sc-ekrjqK ONlhR">
                 <div class="sc-jibziO gXaUJh nav-tit">
-                    <div class="cont-txt ">DPP <b>IN-HOUSE</b><br>GAMES</div>
+                    <div class="cont-txt ">BA <b>IN-HOUSE</b><br>GAMES</div>
                 </div>
             </div>
             <div class="sc-bjeSbO gqCCHE grid-list">
@@ -313,7 +313,7 @@ register();
                 </div>
 
                 <div class="sc-gfqkcP epfPPG bot-view   mine">
-                    <a class="sc-hKTqa gJEGaM game-item-wrap " href="/mines">
+                    <a class="sc-hKTqa gJEGaM game-item-wrap " href="/classic-dice">
                         <div class="lazy-img img">
                             <img src="https://img2.nanogames.io/game/image/48c4ac4d-8e93-4ad4-af48-695fa8f5397e.png" alt="">
                         </div>
@@ -330,7 +330,7 @@ register();
                     </a>
                     <div class="sc-fivaXQ gVplre bot-view">
                         <div class="wrap">
-                            <a class="item" href="/crash/trenball">Mines</a>
+                            <a class="item" href="/classic-dice">Classic Dice</a>
                             <div class="help-btn-wrap">
                                 <button>
                                     <Icon src={BsQuestionCircle}  size="18"  color="rgba(153, 164, 176, 0.6)" className="custom-icon" title="arror" />
@@ -340,9 +340,9 @@ register();
                     </div>
                 </div>
                 <div class="sc-gfqkcP epfPPG bot-view   game-CrashTrenball">
-                    <a class="sc-hKTqa gJEGaM game-item-wrap " href="/crash/trenball">
+                    <a class="sc-hKTqa gJEGaM game-item-wrap " href="/hilo">
                         <div class="lazy-img img">
-                            <img src="https://img2.nanogames.io/game/image/4398e0b7-7da4-4d42-b67d-33d5f2785fc6.png" alt="">
+                            <img src="https://img2.nanogames.io/game/image/d64c5ee5-68c0-4d7e-bf8d-0be925f378b1.png" alt="">
                         </div>
                         <div class="hover-mask">
                             <div class="house-edge">House Edge 1%</div>
@@ -357,7 +357,7 @@ register();
                     </a>
                     <div class="sc-fivaXQ gVplre bot-view">
                         <div class="wrap">
-                            <a class="item" href="/crash/trenball">Crash Trenball</a>
+                            <a class="item" href="/hilo">Hilo</a>
                             <div class="help-btn-wrap">
                                 <button>
                                     <Icon src={BsQuestionCircle}  size="18"  color="rgba(153, 164, 176, 0.6)" className="custom-icon" title="arror" />
@@ -367,9 +367,9 @@ register();
                     </div>
                 </div>
                 <div class="sc-gfqkcP epfPPG bot-view   game-CrashTrenball">
-                    <a class="sc-hKTqa gJEGaM game-item-wrap " href="/crash/trenball">
+                    <a class="sc-hKTqa gJEGaM game-item-wrap " href="/mines">
                         <div class="lazy-img img">
-                            <img src="https://img2.nanogames.io/game/image/4398e0b7-7da4-4d42-b67d-33d5f2785fc6.png" alt="">
+                            <img src="https://img2.nanogames.io/game/image/0aa3d807-0380-4f8e-b65e-3179d4af2234.png" alt="">
                         </div>
                         <div class="hover-mask">
                             <div class="house-edge">House Edge 1%</div>
@@ -384,7 +384,7 @@ register();
                     </a>
                     <div class="sc-fivaXQ gVplre bot-view">
                         <div class="wrap">
-                            <a class="item" href="/crash/trenball">Crash Trenball</a>
+                            <a class="item" href="/mines">Mines</a>
                             <div class="help-btn-wrap">
                                 <button>
                                     <Icon src={BsQuestionCircle}  size="18"  color="rgba(153, 164, 176, 0.6)" className="custom-icon" title="arror" />
@@ -393,97 +393,13 @@ register();
                         </div>
                     </div>
                 </div>
-                <div class="sc-gfqkcP epfPPG bot-view   game-CrashTrenball">
-                    <a class="sc-hKTqa gJEGaM game-item-wrap " href="/crash/trenball">
-                        <div class="lazy-img img">
-                            <img src="https://img2.nanogames.io/game/image/4398e0b7-7da4-4d42-b67d-33d5f2785fc6.png" alt="">
-                        </div>
-                        <div class="hover-mask">
-                            <div class="house-edge">House Edge 1%</div>
-                            <svg class="play-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 63 63">
-                                <defs></defs>
-                                <g fill="none" fill-rule="evenodd">
-                                    <circle cx="31.3" cy="31.3" r="30.3" fill="#000" fill-opacity=".2" stroke="#E5E7EE" stroke-width="2"></circle>
-                                    <path fill="#F5F6F7" d="M39.5 34.3l-11.3 7.5a2 2 0 01-3-1.6v-15a2 2 0 013-1.7L39.5 31a2 2 0 010 3.3z"></path>
-                                </g>
-                            </svg>
-                        </div>
-                    </a>
-                    <div class="sc-fivaXQ gVplre bot-view">
-                        <div class="wrap">
-                            <a class="item" href="/crash/trenball">Crash Trenball</a>
-                            <div class="help-btn-wrap">
-                                <button>
-                                    <Icon src={BsQuestionCircle}  size="18"  color="rgba(153, 164, 176, 0.6)" className="custom-icon" title="arror" />
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                <div class="sc-ckRZPU iBmEfj">
+                    <div class="bg-img"></div>
                 </div>
-                <div class="sc-gfqkcP epfPPG bot-view   game-CrashTrenball">
-                    <a class="sc-hKTqa gJEGaM game-item-wrap " href="/crash/trenball">
-                        <div class="lazy-img img">
-                            <img src="https://img2.nanogames.io/game/image/4398e0b7-7da4-4d42-b67d-33d5f2785fc6.png" alt="">
-                        </div>
-                        <div class="hover-mask">
-                            <div class="house-edge">House Edge 1%</div>
-                            <svg class="play-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 63 63">
-                                <defs></defs>
-                                <g fill="none" fill-rule="evenodd">
-                                    <circle cx="31.3" cy="31.3" r="30.3" fill="#000" fill-opacity=".2" stroke="#E5E7EE" stroke-width="2"></circle>
-                                    <path fill="#F5F6F7" d="M39.5 34.3l-11.3 7.5a2 2 0 01-3-1.6v-15a2 2 0 013-1.7L39.5 31a2 2 0 010 3.3z"></path>
-                                </g>
-                            </svg>
-                        </div>
-                    </a>
-                    <div class="sc-fivaXQ gVplre bot-view">
-                        <div class="wrap">
-                            <a class="item" href="/crash/trenball">Crash Trenball</a>
-                            <div class="help-btn-wrap">
-                                <button>
-                                    <Icon src={BsQuestionCircle}  size="18"  color="rgba(153, 164, 176, 0.6)" className="custom-icon" title="arror" />
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="sc-gfqkcP epfPPG bot-view   game-CrashTrenball">
-                    <a class="sc-hKTqa gJEGaM game-item-wrap " href="/crash/trenball">
-                        <div class="lazy-img img">
-                            <img src="https://img2.nanogames.io/game/image/4398e0b7-7da4-4d42-b67d-33d5f2785fc6.png" alt="">
-                        </div>
-                        <div class="hover-mask">
-                            <div class="house-edge">House Edge 1%</div>
-                            <svg class="play-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 63 63">
-                                <defs></defs>
-                                <g fill="none" fill-rule="evenodd">
-                                    <circle cx="31.3" cy="31.3" r="30.3" fill="#000" fill-opacity=".2" stroke="#E5E7EE" stroke-width="2"></circle>
-                                    <path fill="#F5F6F7" d="M39.5 34.3l-11.3 7.5a2 2 0 01-3-1.6v-15a2 2 0 013-1.7L39.5 31a2 2 0 010 3.3z"></path>
-                                </g>
-                            </svg>
-                        </div>
-                    </a>
-                    <div class="sc-fivaXQ gVplre bot-view">
-                        <div class="wrap">
-                            <a class="item" href="/crash/trenball">Crash Trenball</a>
-                            <div class="help-btn-wrap">
-                                <button>
-                                    <Icon src={BsQuestionCircle}  size="18"  color="rgba(153, 164, 176, 0.6)" className="custom-icon" title="arror" />
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-
-
-
             </div>
         </div>
 
-        <!-- <div class="screen-wrap">
-            <Biggestwin />
+    
 
             <div style="margin-top: 0.875rem;" class="sc-gsFzgR fjPUUh">
                 <div class="sc-cxpSdN kQfmQV tabs sc-cAhXWc fufAIq">
@@ -530,7 +446,7 @@ register();
                     </div>
                 </div>
             </div>
-        </div> -->
+       
 
     </div>
 </div>
@@ -542,7 +458,18 @@ register();
     margin: 0px auto;
     padding: 1.25rem 0.625rem;
 }
-
+.iBmEfj .bg-img {
+    padding-top: 100%;
+    border-radius: 1.25rem;
+    transform: translateZ(0px);
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.317);
+    overflow: hidden;
+    background-image: url(https://res.cloudinary.com/dxwhz3r81/image/upload/v1704480199/msg1612398179-11606-removebg-preview_3_qx8n7b.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 52%;
+}
 
 
 </style>

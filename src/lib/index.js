@@ -4,9 +4,7 @@ import { default_Wallet, usdt_Wallet, ppfWallet,ppdWallet,ppeWallet, pplWallet, 
 import { ServerURl } from "$lib/backendUrl"
 const URL = ServerURl()
 
-export  const UserProfileEl = () => {
-const id = browser && JSON.parse(localStorage.getItem('user'))
-
+export  const UserProfileEl = (auth) => {
 const handleprofile = async (auth) => {
     app_Loading.set(true)
     if(auth){
@@ -46,13 +44,13 @@ const handleprofile = async (auth) => {
 };
 
 
-const handlePPDwallet = async () => {
-    const response = id && await fetch(
-        `${URL}/api/wallet/ppd-wallet`,{
+const handleBTCwallet = async () => {
+    const response = auth && await fetch(
+        `${URL}/api/wallet/btc-wallet`,{
             method: "GET",
             headers: {
             "Content-type": "application/json",
-            "Authorization": `Bearer ${id}`
+            "Authorization": `Bearer ${auth}`
             },
         }
         );
@@ -61,14 +59,30 @@ const handlePPDwallet = async () => {
         return json[0]
         }
     };
-                   
-    const handlePPLwallet = async () => {
-        const response = await fetch(
-            `${URL}/api/wallet/ppl-wallet`,{
+
+    const handleETHwallet = async () => {
+        const response = auth && await fetch(
+            `${URL}/api/wallet/eth-wallet`,{
                 method: "GET",
                 headers: {
                 "Content-type": "application/json",
-                "Authorization": `Bearer ${id}`
+                "Authorization": `Bearer ${auth}`
+                },
+            }
+            );
+            const json = await response.json();
+            if (response.ok) {
+            return json[0]
+            }
+        };
+                   
+    const handleDOGEwallet = async () => {
+        const response = await fetch(
+            `${URL}/api/wallet/doge-wallet`,{
+                method: "GET",
+                headers: {
+                "Content-type": "application/json",
+                "Authorization": `Bearer ${auth}`
                 },
             }
             );
@@ -77,14 +91,14 @@ const handlePPDwallet = async () => {
                 return json[0] 
             }
         };
-            
-const handlePPFwallet = async () => {
+        
+const handleLTCwallet = async () => {
     const response = await fetch(
-        `${URL}/api/wallet/ppf-wallet`,{
+        `${URL}/api/wallet/ltc-wallet`,{
             method: "GET",
             headers: {
             "Content-type": "application/json",
-            "Authorization": `Bearer ${id}`
+            "Authorization": `Bearer ${auth}`
         },
         }
     );
@@ -99,7 +113,7 @@ const handleUSDTwallet = async () => {
         method: "GET",
         headers: {
             "Content-type": "application/json",
-            "Authorization": `Bearer ${id}`
+            "Authorization": `Bearer ${auth}`
         },
         }
     );
@@ -109,5 +123,41 @@ const json = await response.json();
     }
 };
 
-    return { handleprofile, handleUSDTwallet, handlePPFwallet, handlePPLwallet, handlePPDwallet }
+const handleBNBwallet = async () => {
+    const response = await fetch(
+        `${URL}/api/wallet/bnb-wallet`,{
+        method: "GET",
+        headers: {
+            "Content-type": "application/json",
+            "Authorization": `Bearer ${auth}`
+        },
+        }
+    );
+const json = await response.json();
+    if (response.ok) {
+        return json[0]
+    }
+};
+
+const handleTRXwallet = async () => {
+    const response = await fetch(
+        `${URL}/api/wallet/trx-wallet`,{
+        method: "GET",
+        headers: {
+            "Content-type": "application/json",
+            "Authorization": `Bearer ${auth}`
+        },
+        }
+    );
+const json = await response.json();
+    if (response.ok) {
+        return json[0]
+    }
+};
+
+
+    return { handleprofile,handleETHwallet,
+         handleUSDTwallet, handleLTCwallet,
+          handleDOGEwallet, handleBTCwallet, handleBNBwallet,handleTRXwallet
+         }
 };

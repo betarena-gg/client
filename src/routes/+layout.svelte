@@ -36,7 +36,7 @@ import Closesidebar from "$lib/closesidebar.svelte";
 import Loader from "$lib/components/loader.svelte";
 let isOpenSide = true
 let isChatRoom = 0
-let isMenu = false
+$: isMenu = false
 let sideDetection = 0
 
 onMount(async()=>{
@@ -113,10 +113,13 @@ onMount(()=>{
     screen.set(ens)
     if($screen > 1240){
         is_open__Appp.set(true)
+        isOpenSide = true
+        is_mobile = false
     }
     else if($screen < 1240 && $screen > 650){
         is_open__Appp.set(false)
         isOpenSide = false
+        is_mobile = false
     }
 })
 
@@ -153,13 +156,6 @@ const handleChatroom = ((e) => {
 //     }
 // })
 
-const handleMenu = () => {
-    if (isMenu) {
-        isMenu = false
-    } else {
-        isMenu = true
-    }
-}
 
 </script>
 
@@ -197,13 +193,13 @@ const handleMenu = () => {
     <!-- ======================  mobile menu bar ================= -->
     {#if (isMenu)}
         <div class="menubar">
-            <Menubar  on:menu={handleMenu}   />
+            <Menubar  on:menu={()=> isMenu = false}   />
         </div>
     {/if}
 
     {#if !$app_Loading}
     <div id="header" class={`sc-gVkuDy gAvMHL ${isOpenSide ? `side-unfold ${isChatRoom ? "right-chat" : ""}` : `side-fold ${isChatRoom ? "right-chat" : ""}`} `}>
-        <Navbar on:handleChatRoom={handleChatroom}/>
+        <Navbar on:handleChatRoom={handleChatroom} on:handleMenuMobile={()=> isMenu = true }/>
     </div>
     {/if}
 

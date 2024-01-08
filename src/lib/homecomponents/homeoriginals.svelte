@@ -107,7 +107,7 @@
             </div>
         </div>
 
-        <div class="sc-gfqkcP epfPPG bot-view   game-Mines">
+        <!-- <div class="sc-gfqkcP epfPPG bot-view   game-Mines">
             <a class="sc-hKTqa dbJiKC game-item-wrap " href="/mines">
                 <div class="lazy-img img">
                     <img src="https://img2.nanogames.io/game/image/ae817f12-fa67-49b8-b33e-6cafda497488.png" alt="">
@@ -129,7 +129,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
 <div class="sc-ckRZPU iBmEfj">
     <div class="bg-img"></div>
@@ -298,9 +298,9 @@
     position: relative;
     background-color: rgba(0, 0, 0, 0.317);
     overflow: hidden;
-    background-image: url(https://res.cloudinary.com/dxwhz3r81/image/upload/v1697848358/dpp-favic_bh8fwz.png);
+    background-image: url(https://res.cloudinary.com/dxwhz3r81/image/upload/v1704480199/msg1612398179-11606-removebg-preview_3_qx8n7b.png);
     background-repeat: no-repeat;
     background-position: center center;
-    background-size: 32%;
+    background-size: 52%;
 }
 </style>

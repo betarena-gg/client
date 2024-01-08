@@ -8,7 +8,6 @@
   import AiOutlineMenuUnfold from "svelte-icons-pack/ai/AiOutlineMenuUnfold";
   import "../styles/navbar/navbar.css";
   import FiMenu from "svelte-icons-pack/fi/FiMenu";
-  import HiSolidMenu from "svelte-icons-pack/hi/HiSolidMenu";
   import RiSystemArrowDownSLine from "svelte-icons-pack/ri/RiSystemArrowDownSLine";
   import Icon from "svelte-icons-pack/Icon.svelte";
   import { browser } from "$app/environment";
@@ -58,12 +57,10 @@
     }
   }
 
-  $: console.log($screen)
-
 </script>
 
-{#if $screen > 650}
-<div class="header-wrap">
+
+<div id="main-screen" class="header-wrap">
   <div class="header">
     <div class="sc-hGnimi ftyLxH left">
       <div class="sc-iukxot jivBdD logo-pc">
@@ -158,8 +155,9 @@
       {/if}
   </div>
 </div>
-{:else}
-  <div class="sc-hJhJFJ jVgBRe" style="transform: translate3d(0px, 0%, 0px);">
+
+
+  <div id="mobile-screen" class="sc-hJhJFJ jVgBRe" style="transform: translate3d(0px, 0%, 0px);">
     <div class="login-top top">
       <div class="logo-wrap">
         <img alt="logo" src="https://res.cloudinary.com/dxwhz3r81/image/upload/v1704517117/logoshort_dey3mt.png">
@@ -216,18 +214,13 @@
       <div class="bottom">
           <div class="left"></div>
           <div class="right">
-            <button id="chat" class="sc-eicpiI PGOpB chat-btn">
+            <button on:click={handleChat} id="chat" class="sc-eicpiI PGOpB chat-btn">
               <Icon src={BsPlayFill} size="29" color={"rgba(153, 164, 176, 0.8)"} className="custom-icon" />
               <div class="sc-fotOHu gGSOuF badge ">99</div>
             </button>
           </div>
       </div>
   </div>
-{/if}
-
-
-
-
 
 <style>
 .ftyLxH .big-enter {
@@ -479,5 +472,9 @@
   .euzHLF .wallet-enter {
     margin-right: 6px;
 }
+}
+.fGPfpD {
+  height: 100%;
+  width: 7.25rem;
 }
 </style>

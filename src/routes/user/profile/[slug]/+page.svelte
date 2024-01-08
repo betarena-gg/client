@@ -23,6 +23,8 @@ import { page } from '$app/stores'
 import { userStatistics } from "$lib/store/statistic";
 import UserProfile from '$lib/user-profile/user-profile.svelte';
 import Statistics from '$lib/user-profile/statistics.svelte';
+import { screen } from "$lib/store/screen"
+import Loader from '$lib/components/loader.svelte';
 
 let is_loadingel = false
 let is_loading = false
@@ -68,7 +70,7 @@ onMount(async()=>{
 })
 
 
-let is_mobile = false
+$: is_mobile = false
 $:{
     if (browser && window.innerWidth < 650) {
         is_mobile = true
@@ -83,7 +85,7 @@ $:{
 </script>
 
 <div class="sc-bkkeKt kBjSXI" style="opacity: 1;">
-    <div class="dialog "style={`${is_mobile ? "transform: scale(1) translateZ(0px);" : "opacity: 1; width: 464px; height: 631px; margin-top: -315.5px; margin-left: -232px;"}  `}>
+    <div class="dialog "style={`${$screen < 650 ? "transform: scale(1) translateZ(0px);" : "opacity: 1; width: 464px; height: 631px; margin-top: -315.5px; margin-left: -232px;"}  `}>
         {#if is_edit || is_stats}
             <button on:click={()=> handleDiooosb(1)} class="dialog-back" style="opacity: 1; transform: none;">
                 <Icon src={RiSystemArrowLeftSLine}  size="23"  color="rgba(153, 164, 176, 0.6)" />
@@ -689,30 +691,16 @@ $:{
                     </div>
                 </div>
                 {/if}
-
                 <div class="joined">Joined on&nbsp;{$users_profile.joined_at}</div>
             </div>
         </div>
         {:else if is_edit}
         <UserProfile />
         {:else if is_stats}
-
         <Statistics />
-
         {/if}
         {:else}
-            <div class="center">
-            <div class="wave"></div>
-            <div class="wave"></div>
-            <div class="wave"></div>
-            <div class="wave"></div>
-            <div class="wave"></div>
-            <div class="wave"></div>
-            <div class="wave"></div>
-            <div class="wave"></div>
-            <div class="wave"></div>
-            <div class="wave"></div>
-        </div>
+           <Loader />
     {/if}
 
 

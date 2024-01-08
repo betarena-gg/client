@@ -5,6 +5,7 @@ import { routes } from "$lib/store/routes"
 import { handleAuthToken } from "$lib/store/routes"
 import { browser } from '$app/environment';
 $: routes.set(data)
+import "../styles/global.css"
 import Icon from 'svelte-icons-pack/Icon.svelte';
 import HiSolidMenu from "svelte-icons-pack/hi/HiSolidMenu";
 import { UserProfileEl } from "$lib/index";
@@ -19,7 +20,7 @@ setTimeout(()=>{
 import { screen, is_open__Appp, is_open__chat } from "$lib/store/screen"
 import Navbar from "$lib/navbar.svelte";
 import ProfileAuth from "$lib/profleAuth/index.svelte";
-import { profileStore } from "$lib/store/profile"
+import { profileStore, app_Loading } from "$lib/store/profile"
 import SideBar from "$lib/sideBar.svelte";
 import Footer from "$lib/footer.svelte";
 import Menubar from "$lib/mobile/menu/menubar.svelte";
@@ -98,22 +99,12 @@ let ens = browser && window.innerWidth
 browser && window.addEventListener("resize", () => {
     ens = (window.innerWidth)
     screen.set(ens)
-    console.log($screen)
     if (browser && window.innerWidth < 650) {
         is_mobile = true
         isOpenSide = false
     }
-    else if (browser && window.innerWidth > 650 && window.innerWidth < 1000) {
-        // isOpenSide = false
-        // is_mobile = false
-        // is_open__Appp.set(false)
-        // sideDetection = 76
-    }
     else {
-        // is_mobile = false
-        // isOpenSide = true
-        // is_open__Appp.set(true)
-        // sideDetection = 240
+        is_mobile = false
     }
 })
 
@@ -125,6 +116,7 @@ onMount(()=>{
     }
     else if($screen < 1240 && $screen > 650){
         is_open__Appp.set(false)
+        isOpenSide = false
     }
 })
 
@@ -176,11 +168,11 @@ const handleMenu = () => {
         <ProfileAuth />
     {/if}
 
-    {#if (isOpenSide) }
+    {#if (isOpenSide && !is_mobile) }
         <div id="main" style={`width:${isOpenSide ? 240 : 76}px`}>
             <SideBar routes={data} styls={isOpenSide} />
         </div>
-    {:else}
+    {:else if (!isOpenSide && !is_mobile) }
         <div id="main" style={`width:${isOpenSide ? 240 : 76}px`}>
             <Closesidebar routes={data} styls={isOpenSide} />
         </div>
@@ -194,7 +186,7 @@ const handleMenu = () => {
         </div>
     </div>
 
-    {#if !data.preloaed}
+    {#if $app_Loading}
         <div class="preloading">
             <div class="gyuys">
                 <img class="coin-icon" alt="" src="https://res.cloudinary.com/dxwhz3r81/image/upload/v1704480199/msg1612398179-11606-removebg-preview_3_qx8n7b.png">
@@ -209,14 +201,17 @@ const handleMenu = () => {
         </div>
     {/if}
 
-
+    {#if !$app_Loading}
     <div id="header" class={`sc-gVkuDy gAvMHL ${isOpenSide ? `side-unfold ${isChatRoom ? "right-chat" : ""}` : `side-fold ${isChatRoom ? "right-chat" : ""}`} `}>
         <Navbar on:handleChatRoom={handleChatroom}/>
     </div>
+    {/if}
 
-    <main class="sc-lhMiDA ePAxUv">
-        <slot></slot>
-    </main>
+    {#if !$app_Loading}
+        <main class="sc-lhMiDA ePAxUv">
+            <slot></slot>
+        </main>
+    {/if}
 
     <!-- <div id="right-bar" style={ is_mobile ? "" : `width: ${isChatRoom ? ((ens - sideDetection) - 360) : ens - sideDetection}px;`} >
         <header>

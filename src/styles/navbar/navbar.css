@@ -101,12 +101,7 @@
   justify-content: center;
 }
 
-.fnKcEH.button {
-  color: rgb(245, 246, 247);
-  box-shadow: rgba(29, 34, 37, 0.1) 0px 4px 8px 0px;
-  background-color: #c08731;
-  background-image: conic-gradient(from 1turn, #d3aa25, #c08731);
-}
+
 .jsyNKG {
   display: flex;
   -webkit-box-align: center;
@@ -122,6 +117,7 @@
   height: 4rem;
   justify-content: flex-end;
   padding: 0px 0.75rem;
+  gap: 15px;
   position: relative;
 }
 
@@ -242,10 +238,7 @@
   background-image: conic-gradient(from 1turn, #d3aa25, #c08731);
 }
 
-.fGPfpD {
-  height: 100%;
-  width: 7.25rem;
-}
+
 
 .fGPfpD .svg {
   margin-right: 0.3125rem;

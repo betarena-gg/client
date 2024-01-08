@@ -30,7 +30,7 @@ $:{
 }
 
 $: $screen
-$: console.log($is_open__Appp)
+$: $is_open__Appp
 
 register();
 </script>
@@ -40,8 +40,7 @@ register();
     <ProfileAuth />
 {/if}
 
-{#if $screen > 650}
-<div id="home" class="sc-jwQYvw eRdxAb" style={`padding-left:${$is_open__Appp ? 240 : 72}px; padding-right:${$is_open__chat ? 360 : 0}px`}>
+<div id="main-screen" class="sc-jwQYvw eRdxAb" style={`padding-left:${$is_open__Appp ? 240 : 72}px; padding-right:${$is_open__chat ? 360 : 0}px`}>
     <div class="sc-bLdqUH bPsBUR banner">
         <div class="gradient-wrap">
             <div class="swiper swiper-initialized swiper-horizontal sc-haTkiu iyCsvj">
@@ -93,8 +92,9 @@ register();
         </div>
     </div>
 </div>
-{:else}
-<div id="home" class="sc-gFSQbh iDnJIm">
+
+
+<div id="mobile-screen" class="sc-gFSQbh iDnJIm">
     <div class="sc-jibziO bYDJIH banner gradient-mobile ">
         <div class="gradient-wrap">
             <div class="swiper swiper-initialized swiper-horizontal swiper-ios sc-cfJLRR bOeOZi">
@@ -534,9 +534,7 @@ register();
 
     </div>
 </div>
-{/if}
-        
-    
+     
     
 <style>
 .gyJkwe .screen-wrap {
@@ -544,4 +542,7 @@ register();
     margin: 0px auto;
     padding: 1.25rem 0.625rem;
 }
+
+
+
 </style>

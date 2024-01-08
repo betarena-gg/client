@@ -405,6 +405,10 @@
   .right {
     gap: 5px;
   }
+  .fGPfpD {
+    height: 100%;
+    width: 5.25rem;
+  }
 }
 .euzHLF .wallet-enter {
     margin-right: 24px;
@@ -492,8 +496,12 @@
     margin-right: 6px;
 }
 }
-.fGPfpD {
-  height: 100%;
-  width: 7.25rem;
+
+@media screen and (min-width: 650px){
+  .fGPfpD {
+    height: 100%;
+    width: 7.25rem;
+  }
 }
+
 </style>

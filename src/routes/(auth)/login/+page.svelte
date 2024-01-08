@@ -16,7 +16,7 @@
   import { error_msgS, is_loadingS } from "$lib/nestedpages/auth/signup/store";
   import Forget from "../forget/+page.svelte";
   import { isLightMode } from "../../../lib/store/theme";
-
+  import { screen } from "$lib/store/screen"
   const dispatch = createEventDispatcher();
   let email = "";
   let password = "";
@@ -93,7 +93,7 @@
   <div
     class="dialog"
     style={`${
-      is_mobile
+    $screen < 650
         ? "transform: scale(1) translateZ(5px);"
         : "opacity: 1; width: 464px; height: 631px; margin-top: -315.5px; margin-left: -232px;"
     }  `}
@@ -102,7 +102,7 @@
       <img
         alt="logo"
         class="sc-bOtlzW QccSQ"
-        src="https://res.cloudinary.com/dxwhz3r81/image/upload/v1698231569/dpp-logowhite_qv3nij.png"
+        src="https://res.cloudinary.com/dxwhz3r81/image/upload/v1704480199/msg1612398179-11606-removebg-preview_3_qx8n7b.png"
       />
     </div>
 
@@ -127,7 +127,7 @@
         <div class="welcome">
           <div class="msg1">BUILD THE BEST CRYPTO CASINO TOGETHER</div>
           <img
-            src="https://static.nanogames.io/assets/login_coco.1855b11e.png"
+            src="https://res.cloudinary.com/dxwhz3r81/image/upload/v1704543204/NIKE1_34_1_ji6ln1.png"
             alt=""
           />
         </div>
@@ -265,12 +265,8 @@
 </div>
 
 <style>
-      .light-bg {
-    background-color: rgb(255, 255, 255) !important;
-  }
-  .light-text {
-    color: rgb(49, 55, 61) !important;
-  }
+
+
   .light-input-control{
     border: 1px solid rgb(233, 234, 242) !important;
     background-color: rgb(245, 246, 250) !important;
@@ -284,7 +280,7 @@
   }
 
   .ipnwmW {
-    background-color: var(--primary-color);
+    background-color: #1C8B00;
   }
 
   .dialog {
@@ -488,8 +484,8 @@
   }
 
   .QccSQ {
-    height: 1.875rem;
-    margin: 1rem 0px;
+    height: 3.7rem;
+    margin: 0rem -10px;
   }
 
   .iajVfs .other-group button {
@@ -539,12 +535,8 @@
   .eWZHfu.button {
     color: rgb(245, 246, 247);
     box-shadow: rgba(29, 34, 37, 0.1) 0px 4px 8px 0px;
-    background-color: rgb(88, 26, 196);
-    background-image: conic-gradient(
-      from 1turn,
-      rgb(88, 26, 196),
-      rgb(119, 60, 253)
-    );
+    background-color: #c08731;
+    background-image: conic-gradient(from 1turn, #d3aa25, #c08731);
   }
 
   .cBmlor.button-big {
@@ -734,16 +726,7 @@
   .cBmlor.button-big {
     height: 3.625rem;
   }
-  .eWZHfu.button {
-    color: rgb(245, 246, 247);
-    box-shadow: rgba(29, 34, 37, 0.1) 0px 4px 8px 0px;
-    background-color: rgb(88, 26, 196);
-    background-image: conic-gradient(
-      from 1turn,
-      rgb(88, 26, 196),
-      rgb(119, 60, 253)
-    );
-  }
+
   .jBwyNM .buttons .button:first-of-type {
     width: 11rem;
     flex: 0 0 auto;

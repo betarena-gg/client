@@ -12,7 +12,6 @@ import { handleGoogleAuth, handleFacebookAuth } from "$lib/firebaseAuth/index"
 import { ServerURl } from "$lib/backendUrl"
 const URL = ServerURl()
 
-
 let img1 = true
 let img2 = false
 let img3 = false
@@ -164,7 +163,7 @@ onMount(() => {
 
     <div class="dialog "  style={`${is_mobile ? "transform: scale(1) translateZ(0px);" : "opacity: 1; width: 464px; height: 631px; margin-top: -315.5px; margin-left: -232px;"}  `}>
         <div class="dialog-head has-close">
-            <img alt="logo" class="sc-bOtlzW QccSQ" src="https://res.cloudinary.com/dxwhz3r81/image/upload/v1698231569/dpp-logowhite_qv3nij.png">
+            <img alt="logo" class="sc-bOtlzW QccSQ" src="https://res.cloudinary.com/dxwhz3r81/image/upload/v1704480199/msg1612398179-11606-removebg-preview_3_qx8n7b.png">
         </div>
         <button on:click={()=> handleClose()} class="sc-ieecCq fLASqZ close-icon dialog-close">
             <Icon src={IoCloseSharp}  size="18"  color="rgb(255, 255, 255)" />
@@ -172,7 +171,7 @@ onMount(() => {
         <div class="dialog-body no-style sc-zjkyB ipnwmW" style="z-index: 2; transform: none;">
             <div class="welcome">
                 <div class="msg1">BUILD THE BEST CRYPTO CASINO TOGETHER</div>
-                <img src="https://static.nanogames.io/assets/login_coco.1855b11e.png" alt="">
+                <img src="https://res.cloudinary.com/dxwhz3r81/image/upload/v1704543204/NIKE1_34_1_ji6ln1.png" alt="">
             </div>
             <div class="sc-dkPtRN jScFby scroll-view hide-bar sc-bjztik ceTZhf" style="transform: none;">
                 <div id="regist-info" class="sc-fSDTwv kYCmoV">
@@ -504,8 +503,8 @@ img {
 }
 
 .QccSQ {
-    height: 1.875rem;
-    margin: 1rem 0px;
+    height: 3.7rem;
+    margin: 1rem -10px;
 }
 
 .iajVfs .other-group button {

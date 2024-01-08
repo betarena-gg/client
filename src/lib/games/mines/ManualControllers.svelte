@@ -459,7 +459,7 @@ const handlesjen = (e) => {
                     <img class="coin-icon" alt="" src={$default_Wallet.coin_image}>
                 {/if}  
                 {:else}
-                    <img class="coin-icon" alt="" src="https://res.cloudinary.com/dxwhz3r81/image/upload/v1697828376/ppf_logo_ntrqwg.png">
+                    <img class="coin-icon" alt="" src="https://nanogames.io/coin/BTC.black.png">
                 {/if}
                 <div class="sc-kDTinF bswIvI button-group">
                     <button on:click={()=> dive()}>/2</button>

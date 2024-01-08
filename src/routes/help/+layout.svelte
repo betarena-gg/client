@@ -8,8 +8,17 @@ import "../../styles/helpcenter/mobile/index.css"
 import {
     goto
 } from "$app/navigation"
+let fair = true
 </script>
 
+{#if fair}
+<div class="sc-lhMiDA ePAxUv">
+    <div class="sc-eCImPb cuPxwd empty full-abs">
+        <img src="https://static.nanogames.io/assets/empty.acd1f5fe.png" alt="">
+        <div class="msg"> Crypto Encrypted Pending feature </div>
+    </div>
+</div>
+{:else}
 <div class="sc-lhMiDA ePAxUv">
     <div id="helpcenter">
         <div class="sc-hKumaY dUhyFv">
@@ -33,3 +42,6 @@ import {
         </div>
     </div>
 </div>
+{/if}
+
+

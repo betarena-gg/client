@@ -15,7 +15,8 @@
   import { createEventDispatcher } from "svelte";
   import { error_msgS, is_loadingS } from "$lib/nestedpages/auth/signup/store";
   import { isLightMode } from "../../../lib/store/theme";
-
+  import { screen } from "$lib/store/screen"
+  
   const dispatch = createEventDispatcher();
   let isREf = false;
   let email = "";
@@ -79,43 +80,31 @@
     </div>
   {/if}
 
-  <div
-    class="dialog"
-    style={`${
-      is_mobile
+  <div class="dialog" style={`${
+        $screen < 650
         ? "transform: scale(1) translateZ(5px);"
         : "opacity: 1; width: 464px; height: 631px; margin-top: -315.5px; margin-left: -232px;"
     }  `}
   >
     <div class="dialog-head has-close">
-      <img
-        alt="logo"
-        class="sc-bOtlzW QccSQ"
-        src="https://res.cloudinary.com/dxwhz3r81/image/upload/v1698231569/dpp-logowhite_qv3nij.png"
+      <img alt="logo" class="sc-bOtlzW QccSQ"
+        src="https://res.cloudinary.com/dxwhz3r81/image/upload/v1704480199/msg1612398179-11606-removebg-preview_3_qx8n7b.png"
       />
     </div>
     <button
       on:click={() => handleCancel()}
-      class="sc-ieecCq fLASqZ close-icon dialog-close"
-    >
+      class="sc-ieecCq fLASqZ close-icon dialog-close" >
       <Icon
         src={IoCloseSharp}
         size="18"
         color="rgb(255, 255, 255)"
-        className="custom-icon"
-        title="arror"
-      />
+        className="custom-icon" />
     </button>
     <div
-      class="dialog-body no-style sc-zjkyB ipnwmW"
-      style="z-index: 2; transform: none;"
-    >
+      class="dialog-body no-style sc-zjkyB ipnwmW" style="z-index: 2; transform: none;" >
       <div class="welcome">
         <div class="msg1">BUILD THE BEST CRYPTO CASINO TOGETHER</div>
-        <img
-          src="https://static.nanogames.io/assets/login_coco.1855b11e.png"
-          alt=""
-        />
+        <img src="https://res.cloudinary.com/dxwhz3r81/image/upload/v1704543204/NIKE1_34_1_ji6ln1.png" alt="" />
       </div>
       <div
         class={$isLightMode
@@ -244,11 +233,8 @@
                 title="google"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-                  <path fill="#fa455e" d="M16 0a16 16 0 110 32 16 16 0 010-32z"
-                  ></path>
-                  <path
-                    fill="#fff"
-                    d="M19.5 12.3c-.5-.5-1.1-.9-1.8-1a4.8 4.8 0 00-2-.2c-.9 0-1.7.4-2.3 1a5 5 0 00-2 4 5 5 0 004 4.8 5 5 0 001.6 0c.8 0 1.6-.3 2.2-.7.5-.4 1-.9 1.2-1.4l.3-.9v-.2h-4.4v-3.2h7.5l.2.1.1 1v1.2c0 .5 0 1-.2 1.6v-.1a7.4 7.4 0 01-1.4 3 7 7 0 01-3 2.4h-.1c-.6.2-1.2.4-1.9.4a8.8 8.8 0 01-1.9 0c-.8 0-1.5-.1-2.2-.4-.9-.4-1.6-.8-2.3-1.4-1-.8-1.9-2-2.4-3.2l-.5-1.9v-1.4-.1c0-.9.2-1.7.4-2.5.3-.7.7-1.4 1.2-2 1-1.4 2.5-2.5 4.3-3l1.5-.3a11.1 11.1 0 011.3 0 7.7 7.7 0 014.8 2l-.1.3-2 2h-.1z"
+                  <path fill="#fa455e" d="M16 0a16 16 0 110 32 16 16 0 010-32z"></path>
+                  <path fill="#fff"  d="M19.5 12.3c-.5-.5-1.1-.9-1.8-1a4.8 4.8 0 00-2-.2c-.9 0-1.7.4-2.3 1a5 5 0 00-2 4 5 5 0 004 4.8 5 5 0 001.6 0c.8 0 1.6-.3 2.2-.7.5-.4 1-.9 1.2-1.4l.3-.9v-.2h-4.4v-3.2h7.5l.2.1.1 1v1.2c0 .5 0 1-.2 1.6v-.1a7.4 7.4 0 01-1.4 3 7 7 0 01-3 2.4h-.1c-.6.2-1.2.4-1.9.4a8.8 8.8 0 01-1.9 0c-.8 0-1.5-.1-2.2-.4-.9-.4-1.6-.8-2.3-1.4-1-.8-1.9-2-2.4-3.2l-.5-1.9v-1.4-.1c0-.9.2-1.7.4-2.5.3-.7.7-1.4 1.2-2 1-1.4 2.5-2.5 4.3-3l1.5-.3a11.1 11.1 0 011.3 0 7.7 7.7 0 014.8 2l-.1.3-2 2h-.1z"
                   ></path>
                 </svg>
               </button>
@@ -279,12 +265,7 @@
 </div>
 
 <style>
-  .light-bg {
-    background-color: rgb(255, 255, 255) !important;
-  }
-  .light-text {
-    color: rgb(49, 55, 61) !important;
-  }
+
   .light-input-control {
     border: 1px solid rgb(233, 234, 242) !important;
     background-color: rgb(245, 246, 250) !important;
@@ -297,7 +278,7 @@
     filter: none !important;
   }
   .ipnwmW {
-    background-color: var(--primary-color);
+    background-color: #1C8B00;
   }
 
   .dialog {
@@ -517,8 +498,8 @@
   }
 
   .QccSQ {
-    height: 1.875rem;
-    margin: 1rem 0px;
+    height: 3.7rem;
+    margin: 0rem -10px;
   }
 
   .iajVfs .other-group button {
@@ -669,12 +650,8 @@
   .fnKcEH.button {
     color: rgb(245, 246, 247);
     box-shadow: rgba(29, 34, 37, 0.1) 0px 4px 8px 0px;
-    background-color: var(--primary-color);
-    background-image: conic-gradient(
-      from 1turn,
-      rgb(67, 179, 9),
-      rgb(93, 219, 28)
-    );
+    background-color: #c08731;
+    background-image: conic-gradient(from 1turn, #d3aa25, #c08731);
   }
 
   .cBmlor.button-big {

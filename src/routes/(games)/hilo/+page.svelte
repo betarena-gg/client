@@ -7,6 +7,7 @@
   import MyBets from "$lib/games/hilo/MyBets.svelte";
   import { soundManager, soundSettings } from "$lib/games/hilo/store";
   import SM from "$lib/games/hilo/audio/SoundManager";
+  import { screen, is_open__Appp, is_open__chat } from "$lib/store/screen";
   import { socketEvents } from "$lib/games/hilo/socket";
   import { handleisLoggin, profileStore } from "$lib/store/profile";
   import {
@@ -103,7 +104,7 @@
 {/if}
 <div
   id="game-Hilo"
-  class="sc-haTkiu lmWKWf game-style0 sc-hKumaY hmdAmi"
+  class={`sc-haTkiu lmWKWf game-style0 sc-hKumaY hmdAmi ${$is_open__Appp && `is-open`} ${$is_open__chat && `is-chat`}`}
   style="opacity: 1; transform: none;"
 >
   <div class="game-area">
@@ -282,6 +283,7 @@
     display: flex;
     flex-wrap: wrap;
   }
+
   .lmWKWf.game-style0 .game-main {
     padding-left: 330px;
     min-height: 47.5rem;
@@ -437,4 +439,11 @@
     height: 1.4em;
     fill: rgba(153, 164, 176, 0.6);
   }
+.lmWKWf.is-open{
+    padding-left: 50px;
+}
+
+.lmWKWf.is-chat{
+    padding-right: 360px;
+}
 </style>

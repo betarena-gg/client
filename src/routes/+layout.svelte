@@ -7,6 +7,9 @@ import { browser } from '$app/environment';
 $: routes.set(data)
 import Icon from 'svelte-icons-pack/Icon.svelte';
 import HiSolidMenu from "svelte-icons-pack/hi/HiSolidMenu";
+import { UserProfileEl } from "$lib/index";
+const { handleprofile } = UserProfileEl()
+
 
 setTimeout(()=>{
     if(data.preloaed === null){
@@ -34,6 +37,10 @@ let isOpenSide = true
 let isChatRoom = 0
 let isMenu = false
 let sideDetection = 0
+
+onMount(async()=>{
+    await handleprofile($handleAuthToken)
+})
 
 $:{
     for(let i = 0; i < $handle_IsRedwinners.length; i++){
@@ -65,25 +72,8 @@ $:{
     }
 }
 
-// $:{
-//     onMount(() => {
-//     const auth = getAuth(app);
-//     onAuthStateChanged(auth, (user) => {
-//         if (user) {
-//             const uid = user.uid;
-//             handleisLoggin.set(true)
-//             handleisLoading.set(false)
-//         } else {
-//             handleisLoggin.set(false)
-//             handleisLoading.set(false)
-//         }
-//     });
-// })
-// }
-
 
 let is_mobile = true
-
 const handleMainMenu = (() => {
     if (isOpenSide) {
         isOpenSide = false
@@ -92,43 +82,50 @@ const handleMainMenu = (() => {
     } 
     else {
         if (browser && window.innerWidth > 650 && window.innerWidth < 1000) {
-        isOpenSide = true
-        is_open__Appp.set(true)
-        sideDetection = 76
-    }else{
-        isOpenSide = true
-        is_open__Appp.set(true)
-        sideDetection = 240
-    }
+            isOpenSide = true
+            is_open__Appp.set(true)
+            sideDetection = 76
+        }else{
+            isOpenSide = true
+            is_open__Appp.set(true)
+            sideDetection = 240
+        }
     }
 })
 
 let ens = browser && window.innerWidth
-$:{
-browser && addEventListener("resize", () => {
+
+browser && window.addEventListener("resize", () => {
     ens = (window.innerWidth)
     screen.set(ens)
+    console.log($screen)
     if (browser && window.innerWidth < 650) {
         is_mobile = true
+        isOpenSide = false
     }
     else if (browser && window.innerWidth > 650 && window.innerWidth < 1000) {
-        isOpenSide = false
-        is_mobile = false
-        is_open__Appp.set(false)
-        sideDetection = 76
+        // isOpenSide = false
+        // is_mobile = false
+        // is_open__Appp.set(false)
+        // sideDetection = 76
     }
     else {
-        is_mobile = false
-        isOpenSide = true
-        is_open__Appp.set(true)
-        sideDetection = 240
+        // is_mobile = false
+        // isOpenSide = true
+        // is_open__Appp.set(true)
+        // sideDetection = 240
     }
 })
-}
 
 onMount(()=>{
     ens = browser && window.innerWidth
     screen.set(ens)
+    if($screen > 1240){
+        is_open__Appp.set(true)
+    }
+    else if($screen < 1240 && $screen > 650){
+        is_open__Appp.set(false)
+    }
 })
 
 let isnotification = false
@@ -148,21 +145,21 @@ const handleChatroom = ((e) => {
     }
 })
 
-onMount(() => {
-    if (browser && window.innerWidth < 650) {
-        isOpenSide = true
-        sideDetection = 0
-        is_open__Appp.set(false)
-    } else if (browser && window.innerWidth > 1220) {
-        isOpenSide = true
-        sideDetection = 240
-        is_open__Appp.set(true)
-    } else {
-        isOpenSide = false
-        sideDetection = 76
-    }
-})
-
+// onMount(() => {
+//     if (browser && window.innerWidth < 650) {
+//         isOpenSide = false
+//         sideDetection = 0
+//         is_open__Appp.set(false)
+//     } 
+//     else if (browser && window.innerWidth > 1220) {
+//         isOpenSide = true
+//         // sideDetection = 240
+//         is_open__Appp.set(true)
+//     } else {
+//         isOpenSide = false
+//         // sideDetection = 76
+//     }
+// })
 
 const handleMenu = () => {
     if (isMenu) {
@@ -180,14 +177,15 @@ const handleMenu = () => {
     {/if}
 
     {#if (isOpenSide) }
-    <div id="main" style={`width:${isOpenSide ? 240 : 76}px`}>
-        <SideBar routes={data} styls={isOpenSide} />
-    </div>
+        <div id="main" style={`width:${isOpenSide ? 240 : 76}px`}>
+            <SideBar routes={data} styls={isOpenSide} />
+        </div>
     {:else}
-    <div id="main" style={`width:${isOpenSide ? 240 : 76}px`}>
-        <Closesidebar routes={data} styls={isOpenSide} />
-    </div>
+        <div id="main" style={`width:${isOpenSide ? 240 : 76}px`}>
+            <Closesidebar routes={data} styls={isOpenSide} />
+        </div>
     {/if}
+
     <div id="main">
         <div id="menu">
             <button style={`left:${isOpenSide ? 224 : 60}px`} on:click={handleMainMenu}  class="menu">
@@ -195,39 +193,36 @@ const handleMenu = () => {
             </button>
         </div>
     </div>
+
     {#if !data.preloaed}
         <div class="preloading">
             <div class="gyuys">
-                <img class="coin-icon" alt="" src="https://res.cloudinary.com/dxwhz3r81/image/upload/v1699447809/preload_b2jdw0.jpg">
+                <img class="coin-icon" alt="" src="https://res.cloudinary.com/dxwhz3r81/image/upload/v1704480199/msg1612398179-11606-removebg-preview_3_qx8n7b.png">
             </div>
         </div>
     {/if}
 
-
     <!-- ======================  mobile menu bar ================= -->
     {#if (isMenu)}
-    <div class="menubar">
-        <Menubar  on:menu={handleMenu}   />
-    </div>
+        <div class="menubar">
+            <Menubar  on:menu={handleMenu}   />
+        </div>
     {/if}
-    <div id="right-bar" style={ is_mobile ? "" : `width: ${isChatRoom ? ((ens - sideDetection) - 360) : ens - sideDetection}px;`} >
+
+
+    <div id="header" class={`sc-gVkuDy gAvMHL ${isOpenSide ? `side-unfold ${isChatRoom ? "right-chat" : ""}` : `side-fold ${isChatRoom ? "right-chat" : ""}`} `}>
+        <Navbar on:handleChatRoom={handleChatroom}/>
+    </div>
+
+    <main class="sc-lhMiDA ePAxUv">
+        <slot></slot>
+    </main>
+
+    <!-- <div id="right-bar" style={ is_mobile ? "" : `width: ${isChatRoom ? ((ens - sideDetection) - 360) : ens - sideDetection}px;`} >
         <header>
             <Navbar on:handleMenuMobile={handleMenu} on:handleChatRoom={handleChatroom} styles={isOpenSide} chatroom={isChatRoom} />
         </header>
-
-       
         {#if $handleisLoading}
-        <!-- <div class="center">
-            <div class="wave"></div>
-            <div class="wave"></div>
-            <div class="wave"></div>
-            <div class="wave"></div>
-            <div class="wave"></div>
-            <div class="wave"></div>
-            <div class="wave"></div>
-            <div class="wave"></div>
-            <div class="wave"></div>
-        </div> -->
         <div style="height: 700px">
             <Loader />
         </div>
@@ -240,21 +235,33 @@ const handleMenu = () => {
                 <Footer />
             </footer>
         {/if}
+</div> -->
 
-   
-
-    </div>
-    {#if (isChatRoom)}
+{#if (isChatRoom)}
     {#if isnotification}
-    <Notification />
+        <Notification />
     {:else}
-    <ChatSide on:closeChat={handleChatroom} />
+        <ChatSide on:closeChat={handleChatroom} />
     {/if}
-
-    {/if}
+{/if}
 </div>
 
 <style>
+
+#header.side-unfold{
+    padding-left: 240px;
+}
+
+#header.side-unfold{
+    padding-left: 240px;
+}
+
+#header.side-fold.right-chat{
+    padding-right: 340px;
+}
+#header.side-unfold.right-chat{
+    padding-right: 340px;
+}
 .preloading{
     background-color: var(--background-color);
     position: fixed;
@@ -276,7 +283,7 @@ const handleMenu = () => {
     align-items: center;
     top: 30%;
     align-content: center;
-    width: 180px;
+    width: 280px;
     border-radius: 50%;
     animation: move 10s infinite;
 }
@@ -291,14 +298,27 @@ const handleMenu = () => {
         top: 55%;
         transition: all 4.5s ease;
     }
-    /* 70%{
-        top: 55%;
-        transition: all 4.5s ease;
-    }
-    100%{
-        top: 0%;
-        transition: all 4.5s ease;
-    } */
 }
 
+.gAvMHL {
+    height: 4rem;
+    position: fixed;
+    z-index: 101;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    background-color: rgb(36, 38, 43);
+    transition: all 0.2s linear 0s;
+    padding-left: 72px;
+}
+.gAvMHL::after {
+    content: "";
+    position: absolute;
+    left: 0px;
+    bottom: -0.75rem;
+    width: 100%;
+    height: 0.75rem;
+    background-image: linear-gradient(rgb(17, 20, 21), rgba(36, 38, 43, 0));
+    opacity: 0.25;
+}
 </style>

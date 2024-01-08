@@ -8,9 +8,19 @@
   import "../../styles/lottery/mobile/instructions.css"
   import "../../styles/lottery/mobile/guides.css"
 
+  let loooo = true
+
 </script>
 
-<div>
+{#if loooo}
+  <div class="sc-lhMiDA ePAxUv">
+    <div class="sc-eCImPb cuPxwd empty full-abs">
+        <img src="https://static.nanogames.io/assets/empty.acd1f5fe.png" alt="">
+        <div class="msg">lottery Game is pending! </div>
+    </div>
+  </div>
+  {:else}
+  <div>
     <div class="lottery-page">
         <Main  />
     </div>
@@ -18,6 +28,9 @@
         <Mobile />
     </div>
 </div>
+{/if}
+
+
 
 <style>
    

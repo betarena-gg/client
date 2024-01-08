@@ -65,7 +65,7 @@
 }
 .knLCVT.select .menu-pc {
     font-weight: bold;
-    background-image: linear-gradient(to right, rgba(105, 179, 1, 0.4), rgba(85, 89, 102, 0.4) 33%, rgba(85, 89, 102, 0.4));
+    background-image: linear-gradient(to right, #A74DE2, rgba(85, 89, 102, 0.4) 0%, #f2b12697);
     color: rgb(245, 246, 247);
 }
 .knLCVT .menu-pc {
@@ -106,7 +106,7 @@
     padding-top: 2px;
 }
 .eTxQfM .special-nav span {
-    color: rgb(93, 219, 28);
+    color: #AD8605;
     font-size: 1.125rem;
     font-weight: bold;
     font-family: FuturaBold;
@@ -264,7 +264,7 @@
     height: 2.5rem;
     min-width: 2.5rem;
     border-radius: 50%;
-    background: rgb(67, 179, 9);
+    background: #f2b12697;
     display: flex;
     -webkit-box-align: center;
     align-items: center;

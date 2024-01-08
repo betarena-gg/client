@@ -2,8 +2,17 @@
 import Icon from 'svelte-icons-pack/Icon.svelte';
 import AiOutlineDoubleRight from "svelte-icons-pack/ai/AiOutlineDoubleRight";
 import { handleisLoggin } from "$lib/store/profile";
+let dppp = true
 </script>
 
+{#if dppp}
+<div class="sc-lhMiDA ePAxUv">
+    <div class="sc-eCImPb cuPxwd empty full-abs">
+        <img src="https://static.nanogames.io/assets/empty.acd1f5fe.png" alt="">
+        <div class="msg">Ths page is pending </div>
+    </div>
+</div>
+{:else}
 <div class="sc-lhMiDA ePAxUv" style="opacity: 1; transform: none;">
     <div id="promotion" class="sc-hmvnCu cbjyVS p-small">
         <div class="sc-leSONj gFnRlT">
@@ -121,6 +130,9 @@ import { handleisLoggin } from "$lib/store/profile";
         </div>
     </div>
 </div>
+{/if}
+
+
 
 <style>
 .cBmlor {

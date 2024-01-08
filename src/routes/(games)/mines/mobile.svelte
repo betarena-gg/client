@@ -28,6 +28,7 @@ const { historyMines } = MinesHistory()
 import { onMount } from "svelte";
 import { handleAuthToken } from "$lib/store/routes";
 import axios from "axios";
+import { screen, is_open__Appp, is_open__chat } from "$lib/store/screen";
 import win from "$lib/games/mines/audio/scale-d6-106129.mp3";
 import wion from "$lib/games/mines/audio/box-crash-106687.mp3";
 import cr from "$lib/games/mines/audio/click.wav";
@@ -2800,184 +2801,185 @@ const handleAutoSet = ((erii)=>{
 <HistoryDetails on:close={handleDiceHistoryDetail} DgII={DgII} />
 {/if}
 
-<div class="sc-lhMiDA ePAxUv" style="opacity: 1; transform: none;">
-    <div id="game-Mines" class="sc-haTkiu lmWKWf game-style-mobile sc-bOtlzW bKHexS">
-        <div class="game-area">
-            <div class="game-main">
-                <div class="game-view">
-                    <div class="sc-hoHwyw fIoiVG game-recent ">
-                        <div class="recent-list-wrap">
-                            {#if $handleisLoggin}
-                                {#if $mine_history.length !== 0}
-                                <div class="recent-list" style="width: 100%; transform: translate(0%, 0px);">
-                                {#each $mine_history.slice(-6) as  dice } 
-                                    <button  on:click={()=> handleDiceHistoryDetail(dice)} class="recent-item" style="width: 30%;">
-                                        <div class={`item-wrap ${dice.has_won ? "is-win" : "is-lose"} `}>{(parseFloat(dice.cashout)).toFixed(2)}x</div>
-                                    </button>
-                                {/each}
-                                </div> 
-                                {:else}
-                                <div class="empty-item">
-                                    <p>Game results will be displayed here.</p>
-                                </div>
-                                {/if}
-                                {:else}
-                                <div class="empty-item">
-                                    <p>Game results will be displayed here.</p>
-                                </div>
-                            {/if}
-                        </div>
-                    </div>
-                    <div class="sc-hcupDf dqwCNK game-box sc-jHwEXd fhyNel">
-                        <div class="sc-gWDJhD hnBJiv mine-stage">
-                            {#if $HandleWinning}
-                            <div class="sc-lcdCCa gPUDNx win-wrap" style="opacity: 1; transform: none;">
-                                <div class="sc-jrQzAO iodxXo amount">
-                                    <span style="transform: scale(0.963115);">{(parseFloat($HandleWinning.profit)).toFixed(5)} {$HandleWinning.bet_token_name}</span>
-                                </div>
-                                <div class="odds">{(parseFloat($HandleWinning.cashout)).toFixed(2)}×</div>
-                            </div>
-                            {/if}
-                            {#if !$is_automode}
-                            <div class="grids-wrap ">
-                                {#if $HandleIsAlive}
-                                {#each $minesStore as ui}
-                                <button disabled={ui.active && !ui.mine} on:pointerenter={playSound} on:click={()=>handleMines(ui)} class={`sc-kiwPtn gmXWCK grid-item ${false && "unselected"}`}>
-                                    {#if ui.active && !ui.mine}
-                                    <div class={`sc-cdJjGe gsYRFa qLoBl`}>
-                                        <div class="sc-cdJjGe gsYRFa graph"></div>
-                                    </div>
-                                    {:else if ui.active && ui.mine }
-                                    <div class="sc-cdJjGe sc-eSJyHI gsYRFa eojQMr effect end mines3"></div>
-                                    {:else}
-                                    <div class={`sc-cdJjGe gsYRFa`}>
-                                    </div>
-                                {/if}
+<div id="game-Mines" class={`sc-haTkiu lmWKWf game-style-mobile sc-bOtlzW bKHexS ${$is_open__Appp && `is-open`} ${$is_open__chat && `is-chat`}`}>
+    <div class="game-area">
+        <div class="game-main">
+            <div class="game-view">
+                <div class="sc-hoHwyw fIoiVG game-recent ">
+                    <div class="recent-list-wrap">
+                        {#if $handleisLoggin}
+                            {#if $mine_history.length !== 0}
+                            <div class="recent-list" style="width: 100%; transform: translate(0%, 0px);">
+                            {#each $mine_history.slice(-6) as  dice } 
+                                <button  on:click={()=> handleDiceHistoryDetail(dice)} class="recent-item" style="width: 30%;">
+                                    <div class={`item-wrap ${dice.has_won ? "is-win" : "is-lose"} `}>{(parseFloat(dice.cashout)).toFixed(2)}x</div>
                                 </button>
-                                {/each}
-                                {:else if $HandleHas_won && !$HandleIsAlive}
-                                {#each $minesStore as ui}
-                                <button disabled={true} class={`sc-kiwPtn gmXWCK grid-item ${!ui.active && !ui.mine && "unselected"} `}>
-                                    {#if !ui.active && !ui.mine}
-                                    <div class={`sc-cdJjGe gsYRFa qLoBl`}>
-                                        <div class="sc-cdJjGe gsYRFa graph"></div>
-                                    </div>
-                                    {:else if !ui.active && ui.mine }
-                                    <div class="sc-lcDUFh gywOmz mines4"></div>
-                                    {:else if ui.active && ui.mine }
-                                    <div class="sc-cdJjGe sc-eSJyHI gsYRFa eojQMr effect end mines3"></div>
-                                    {:else}
-                                    <div class={`sc-cdJjGe gsYRFa qLoBl`}>
-                                        <div class="sc-cdJjGe gsYRFa graph"></div>
-                                    </div>
-                                    {/if}
-                                </button>
-                                {/each}
-                                {:else}
-                                {#each $skown as ui}
-                                <button disabled class={`sc-kiwPtn gmXWCK grid-item unselected`}>
-                                    {#if ui.active && !ui.mine}
-                                    <div class={`sc-cdJjGe gsYRFa qLoBl`}>
-                                        <div class="sc-cdJjGe gsYRFa graph"></div>
-                                    </div>
-                                    {:else if ui.active && ui.mine }
-                                    <div class="sc-cdJjGe sc-eSJyHI gsYRFa eojQMr effect end mines3"></div>
-                                    {:else}
-                                    <div class={`sc-cdJjGe gsYRFa`}></div>
-                                    {/if}
-                                </button>
-                                {/each}
-                                {/if}
-                            </div>
+                            {/each}
+                            </div> 
                             {:else}
-                            <div class="grids-wrap ">
-                                {#each $skown as ui}
-                                    <button on:pointerenter={playSound} on:click={()=> handleAutoSet(ui)} class={`sc-kiwPtn gmXWCK grid-item unselected`}>
-                                        {#if ui.active}
-                                            <div class="sc-ljMRFG sc-gDGHff liFRVf qfGmA"></div>
-                                        {:else}
-                                            <div class={`sc-cdJjGe gsYRFa`}></div>
-                                        {/if}
-                                    </button>
-                                {/each}
+                            <div class="empty-item">
+                                <p>Game results will be displayed here.</p>
                             </div>
                             {/if}
-                            <div class="sc-ieCETs dOthbb">
-                                <div class=" star-item index1"></div>
-                                <div class=" star-item index2"></div>
-                                <div class="active  star-item index3"></div>
-                                <div class="active  star-item index4"></div>
-                            </div>
-                        </div>
-                        <div class="sc-gLDmcm gnjHQb"><span>House Edge 1%</span></div>
-                        <svg class="box-bg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 996 46"><defs><linearGradient id="gcardBg" x1="50%" x2="50%" y1="0%" y2="100%"><stop offset="0%" stop-color="#31343C"></stop><stop offset="100%" stop-color="#1E2024" stop-opacity="0"></stop></linearGradient></defs><g opacity=".899"><path fill="url(#gcardBg)" fill-rule="evenodd" d="M0 0h996L892 46H96z" opacity=".598" transform="rotate(-180 498 23)"></path></g></svg>
-                    </div>  
-                </div>
-                <div id="Mines-control-0" class="sc-hLVXRe cYiOHZ game-control style-mobile">
-                    <div class="sc-iwjdpV ikWSlH radio game-control-switch">
-                        <button on:click={()=>handleTabs(1)} class={` ${is_manual ? "is-active" : "" }`}>
-                            <div class="label">Manual</div>
-                        </button>
-                        <button on:click={()=>handleTabs(2)} class={` ${is_manual ? "" : "is-active"}`}>
-                            <div class="label">Auto</div>
-                        </button>
-                    </div>
-                {#if is_manual}
-                    <MobileManualControllers />
-                {:else}
-                    <MobileAutoController />
-                {/if}
-                <div class="game-actions">
-                    <button on:click={()=> handleSoundState()} class={`action-item ${playPlayb ? "active" : ""} `}>
-                        <Icon src={FiMusic}  size="23"  color={` ${playPlayb ? "rgb(67, 179, 9)" : "rgba(153, 164, 176, 0.6)"} `} title="Music" />
-                    </button>
-                    <button on:click={()=> playBackground()} class={`action-item ${$soundHandler ? "active" : ""} `}>
-                        {#if $soundHandler}
-                            <Icon src={TiVolumeDown}  size="23"  color={`rgb(67, 179, 9)`} title="Sound" />
                             {:else}
-                            <Icon src={TiVolumeMute}  size="23"  color={`rgba(153, 164, 176, 0.6)`} title="Sound closed" />
+                            <div class="empty-item">
+                                <p>Game results will be displayed here.</p>
+                            </div>
                         {/if}
+                    </div>
+                </div>
+                <div class="sc-hcupDf dqwCNK game-box sc-jHwEXd fhyNel">
+                    <div class="sc-gWDJhD hnBJiv mine-stage">
+                        {#if $HandleWinning}
+                        <div class="sc-lcdCCa gPUDNx win-wrap" style="opacity: 1; transform: none;">
+                            <div class="sc-jrQzAO iodxXo amount">
+                                <span style="transform: scale(0.963115);">{(parseFloat($HandleWinning.profit)).toFixed(5)} {$HandleWinning.bet_token_name}</span>
+                            </div>
+                            <div class="odds">{(parseFloat($HandleWinning.cashout)).toFixed(2)}×</div>
+                        </div>
+                        {/if}
+                        {#if !$is_automode}
+                        <div class="grids-wrap ">
+                            {#if $HandleIsAlive}
+                            {#each $minesStore as ui}
+                            <button disabled={ui.active && !ui.mine} on:pointerenter={playSound} on:click={()=>handleMines(ui)} class={`sc-kiwPtn gmXWCK grid-item ${false && "unselected"}`}>
+                                {#if ui.active && !ui.mine}
+                                <div class={`sc-cdJjGe gsYRFa qLoBl`}>
+                                    <div class="sc-cdJjGe gsYRFa graph"></div>
+                                </div>
+                                {:else if ui.active && ui.mine }
+                                <div class="sc-cdJjGe sc-eSJyHI gsYRFa eojQMr effect end mines3"></div>
+                                {:else}
+                                <div class={`sc-cdJjGe gsYRFa`}>
+                                </div>
+                            {/if}
+                            </button>
+                            {/each}
+                            {:else if $HandleHas_won && !$HandleIsAlive}
+                            {#each $minesStore as ui}
+                            <button disabled={true} class={`sc-kiwPtn gmXWCK grid-item ${!ui.active && !ui.mine && "unselected"} `}>
+                                {#if !ui.active && !ui.mine}
+                                <div class={`sc-cdJjGe gsYRFa qLoBl`}>
+                                    <div class="sc-cdJjGe gsYRFa graph"></div>
+                                </div>
+                                {:else if !ui.active && ui.mine }
+                                <div class="sc-lcDUFh gywOmz mines4"></div>
+                                {:else if ui.active && ui.mine }
+                                <div class="sc-cdJjGe sc-eSJyHI gsYRFa eojQMr effect end mines3"></div>
+                                {:else}
+                                <div class={`sc-cdJjGe gsYRFa qLoBl`}>
+                                    <div class="sc-cdJjGe gsYRFa graph"></div>
+                                </div>
+                                {/if}
+                            </button>
+                            {/each}
+                            {:else}
+                            {#each $skown as ui}
+                            <button disabled class={`sc-kiwPtn gmXWCK grid-item unselected`}>
+                                {#if ui.active && !ui.mine}
+                                <div class={`sc-cdJjGe gsYRFa qLoBl`}>
+                                    <div class="sc-cdJjGe gsYRFa graph"></div>
+                                </div>
+                                {:else if ui.active && ui.mine }
+                                <div class="sc-cdJjGe sc-eSJyHI gsYRFa eojQMr effect end mines3"></div>
+                                {:else}
+                                <div class={`sc-cdJjGe gsYRFa`}></div>
+                                {/if}
+                            </button>
+                            {/each}
+                            {/if}
+                        </div>
+                        {:else}
+                        <div class="grids-wrap ">
+                            {#each $skown as ui}
+                                <button on:pointerenter={playSound} on:click={()=> handleAutoSet(ui)} class={`sc-kiwPtn gmXWCK grid-item unselected`}>
+                                    {#if ui.active}
+                                        <div class="sc-ljMRFG sc-gDGHff liFRVf qfGmA"></div>
+                                    {:else}
+                                        <div class={`sc-cdJjGe gsYRFa`}></div>
+                                    {/if}
+                                </button>
+                            {/each}
+                        </div>
+                        {/if}
+                        <div class="sc-ieCETs dOthbb">
+                            <div class=" star-item index1"></div>
+                            <div class=" star-item index2"></div>
+                            <div class="active  star-item index3"></div>
+                            <div class="active  star-item index4"></div>
+                        </div>
+                    </div>
+                    <div class="sc-gLDmcm gnjHQb"><span>House Edge 1%</span></div>
+                    <svg class="box-bg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 996 46"><defs><linearGradient id="gcardBg" x1="50%" x2="50%" y1="0%" y2="100%"><stop offset="0%" stop-color="#31343C"></stop><stop offset="100%" stop-color="#1E2024" stop-opacity="0"></stop></linearGradient></defs><g opacity=".899"><path fill="url(#gcardBg)" fill-rule="evenodd" d="M0 0h996L892 46H96z" opacity=".598" transform="rotate(-180 498 23)"></path></g></svg>
+                </div>  
+            </div>
+            <div id="Mines-control-0" class="sc-hLVXRe cYiOHZ game-control style-mobile">
+                <div class="sc-iwjdpV ikWSlH radio game-control-switch">
+                    <button on:click={()=>handleTabs(1)} class={` ${is_manual ? "is-active" : "" }`}>
+                        <div class="label">Manual</div>
                     </button>
-                    <button on:click={hanhisSeed} class="action-item  " id="set_seed">
-                        <Icon src={BsEgg}  size="23"  color={`rgba(153, 164, 176, 0.6)`} title="Seed" />
-                    </button>
-                    <button on:click={stats} class="action-item  ">
-                        <Icon src={RiMapGuideFill}  size="23"  color={`rgba(153, 164, 176, 0.6)`} title="Live stat" />
-                    </button>
-                    <button on:click={handleIsHelp} class="action-item  ">
-                        <Icon src={AiOutlineQuestionCircle}  size="23"  color={`rgba(153, 164, 176, 0.6)`} title="Help" />
+                    <button on:click={()=>handleTabs(2)} class={` ${is_manual ? "" : "is-active"}`}>
+                        <div class="label">Auto</div>
                     </button>
                 </div>
-            </div>
+            {#if is_manual}
+                <MobileManualControllers />
+            {:else}
+                <MobileAutoController />
+            {/if}
+            <div class="game-actions">
+                <button on:click={()=> handleSoundState()} class={`action-item ${playPlayb ? "active" : ""} `}>
+                    <Icon src={FiMusic}  size="23"  color={` ${playPlayb ? "rgb(67, 179, 9)" : "rgba(153, 164, 176, 0.6)"} `} title="Music" />
+                </button>
+                <button on:click={()=> playBackground()} class={`action-item ${$soundHandler ? "active" : ""} `}>
+                    {#if $soundHandler}
+                        <Icon src={TiVolumeDown}  size="23"  color={`rgb(67, 179, 9)`} title="Sound" />
+                        {:else}
+                        <Icon src={TiVolumeMute}  size="23"  color={`rgba(153, 164, 176, 0.6)`} title="Sound closed" />
+                    {/if}
+                </button>
+                <button on:click={hanhisSeed} class="action-item  " id="set_seed">
+                    <Icon src={BsEgg}  size="23"  color={`rgba(153, 164, 176, 0.6)`} title="Seed" />
+                </button>
+                <button on:click={stats} class="action-item  ">
+                    <Icon src={RiMapGuideFill}  size="23"  color={`rgba(153, 164, 176, 0.6)`} title="Live stat" />
+                </button>
+                <button on:click={handleIsHelp} class="action-item  ">
+                    <Icon src={AiOutlineQuestionCircle}  size="23"  color={`rgba(153, 164, 176, 0.6)`} title="Help" />
+                </button>
             </div>
         </div>
-
-        <div class="sc-cxpSdN kQfmQV tabs game-tabs len-3">
-            <div class="tabs-navs">
-                <button on:click={()=>handleAllbet(1)} class={`tabs-nav ${is_allbet && "is-active"}`}>All Bets</button>
-                <button on:click={()=>handleAllbet(2)} class={`tabs-nav ${is_mybet && "is-active"}`}>My Bets</button>
-                <button on:click={()=>handleAllbet(3)} class={`tabs-nav ${is_contest && "is-active"}`}>Contest</button>
-                {#if is_allbet}
-                <div class="bg" style={`left: 0%; right: 66.6667%;`}></div>
-                {:else if is_mybet}
-                <div class="bg" style="left: 33.3333%; right: 33.3333%;"></div>
-                {:else if is_contest}
-                <div class="bg" style="left: 66.6667%; right: 0%;"></div>
-               {/if}
-            </div>
-        {#if is_allbet}
-          <Allbet />
-          {:else if is_mybet}
-          <Mybet />
-          {/if}
         </div>
     </div>
+
+    <div class="sc-cxpSdN kQfmQV tabs game-tabs len-3">
+        <div class="tabs-navs">
+            <button on:click={()=>handleAllbet(1)} class={`tabs-nav ${is_allbet && "is-active"}`}>All Bets</button>
+            <button on:click={()=>handleAllbet(2)} class={`tabs-nav ${is_mybet && "is-active"}`}>My Bets</button>
+            <button on:click={()=>handleAllbet(3)} class={`tabs-nav ${is_contest && "is-active"}`}>Contest</button>
+            {#if is_allbet}
+            <div class="bg" style={`left: 0%; right: 66.6667%;`}></div>
+            {:else if is_mybet}
+            <div class="bg" style="left: 33.3333%; right: 33.3333%;"></div>
+            {:else if is_contest}
+            <div class="bg" style="left: 66.6667%; right: 0%;"></div>
+            {/if}
+        </div>
+    {#if is_allbet}
+        <Allbet />
+        {:else if is_mybet}
+        <Mybet />
+        {/if}
+    </div>
 </div>
+
 
 <style>
 .qfGmA {
     background-color: rgb(57, 14, 113) !important;
 }
+
+
 .liFRVf {
     position: absolute;
     inset: 0px;
@@ -3817,6 +3819,12 @@ const handleAutoSet = ((erii)=>{
 }
 }
 
+.lmWKWf.is-open{
+    padding-left: 50px;
+}
 
+.lmWKWf.is-chat{
+    padding-right: 360px;
+}
 
 </style>

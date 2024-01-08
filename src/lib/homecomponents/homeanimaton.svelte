@@ -15,7 +15,7 @@ register();
                         <img alt="logo" src="https://static.nanogames.io/assets/bigprofit.ae9b1ce1.png">
                     </div>
                     <div class="word">
-                        <p><span style="color: rgb(231, 11, 108);">Much</span>Wow Wins</p>
+                        <p><span style="color: rgb(245, 192, 31);">Much</span>Wow Wins</p>
                     </div>
                 </div>
                 <div class="swiper swiper-initialized swiper-vertical">
@@ -245,7 +245,7 @@ register();
                     <img alt="logo" src="https://static.nanogames.io/assets/popular.91e8961d.png">
                 </div>
                 <div class="word">
-                    <p><span style="color: rgb(93, 219, 28);">Trending</span>Right Now</p>
+                    <p><span style="color: rgb(245, 192, 31);">Trending</span>Right Now</p>
                 </div>
             </div>
 

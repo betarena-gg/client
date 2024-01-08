@@ -131,80 +131,78 @@ const handleSoundState = (()=>{
 
 {#if !is_loading}
 <div style={`${$is_open__chat && $is_open__Appp && $screen > 1579 || $is_open__chat && !$is_open__Appp && $screen > 1219 || !$is_open__chat && !$is_open__Appp && $screen > 1049 || !$is_open__chat && $is_open__Appp && $screen > 1214 ? "" : "display:none"}`} id="dice-main">
-    <div class="sc-lhMiDA ePAxUv" style="opacity: 1; transform: none;">
-        <div id="game-ClassicDice" class="sc-haTkiu lmWKWf game-style0 sc-gDGHff gYWFhf">
-            <div class="game-area">
-                <div class="game-main">
-                    <Controls />
-                    <Gameview />
-    
-                    <div class="game-actions">
-                        <button disabled={playPlayb} on:click={()=> playBackground() } class={`action-item ${playPlayb ? "active" : ""} `}>
-                            <Icon src={FiMusic}  size="23"  color={` ${playPlayb ? "rgb(67, 179, 9)" : "rgba(153, 164, 176, 0.6)"} `} title="Music" />
-                        </button>
+    <div id="game-ClassicDice" class={`sc-haTkiu lmWKWf game-style0 sc-gDGHff gYWFhf ${$is_open__Appp && `is-open`} ${$is_open__chat && `is-chat`}`}>
+        <div class="game-area">
+            <div class="game-main">
+                <Controls />
+                <Gameview />
 
-                        <button on:click={()=> handleSoundState()} class={`action-item ${$soundHandler ? "active" : ""} `}>
-                            {#if $soundHandler}
-                             <Icon src={TiVolumeDown}  size="23"  color={`rgb(67, 179, 9)`} title="Sound" />
-                                {:else}
-                             <Icon src={TiVolumeMute}  size="23"  color={`rgba(153, 164, 176, 0.6)`} title="Sound closed" />
-                            {/if}
-                        </button>
+                <div class="game-actions">
+                    <button disabled={playPlayb} on:click={()=> playBackground() } class={`action-item ${playPlayb ? "active" : ""} `}>
+                        <Icon src={FiMusic}  size="23"  color={` ${playPlayb ? "rgb(67, 179, 9)" : "rgba(153, 164, 176, 0.6)"} `} title="Music" />
+                    </button>
 
-                        <button on:click={handleHotKey} class="action-item  ">
-                            <Icon src={BiSolidKeyboard}  size="23"  color={`rgba(153, 164, 176, 0.6)`} title="Hot keys" />
-                        </button>
-                        <button on:click={hanhisSeed} class="action-item  " id="set_seed">
-                            <Icon src={BsEgg}  size="23"  color={`rgba(153, 164, 176, 0.6)`} title="Seed" />
-                        </button>
-                        <button on:click={stats} class="action-item  ">
-                            <Icon src={RiMapGuideFill}  size="23"  color={`rgba(153, 164, 176, 0.6)`} title="Live stat" />
-                        </button>
-                        <button on:click={handleIsHelp} class="action-item  ">
-                            <Icon src={AiOutlineQuestionCircle}  size="23"  color={`rgba(153, 164, 176, 0.6)`} title="Help" />
-                        </button>
-                    </div>
+                    <button on:click={()=> handleSoundState()} class={`action-item ${$soundHandler ? "active" : ""} `}>
+                        {#if $soundHandler}
+                            <Icon src={TiVolumeDown}  size="23"  color={`rgb(67, 179, 9)`} title="Sound" />
+                            {:else}
+                            <Icon src={TiVolumeMute}  size="23"  color={`rgba(153, 164, 176, 0.6)`} title="Sound closed" />
+                        {/if}
+                    </button>
+
+                    <button on:click={handleHotKey} class="action-item  ">
+                        <Icon src={BiSolidKeyboard}  size="23"  color={`rgba(153, 164, 176, 0.6)`} title="Hot keys" />
+                    </button>
+                    <button on:click={hanhisSeed} class="action-item  " id="set_seed">
+                        <Icon src={BsEgg}  size="23"  color={`rgba(153, 164, 176, 0.6)`} title="Seed" />
+                    </button>
+                    <button on:click={stats} class="action-item  ">
+                        <Icon src={RiMapGuideFill}  size="23"  color={`rgba(153, 164, 176, 0.6)`} title="Live stat" />
+                    </button>
+                    <button on:click={handleIsHelp} class="action-item  ">
+                        <Icon src={AiOutlineQuestionCircle}  size="23"  color={`rgba(153, 164, 176, 0.6)`} title="Help" />
+                    </button>
                 </div>
             </div>
-    
-            <div class="sc-cxpSdN kQfmQV tabs game-tabs len-3">
-                <div class="tabs-navs">
-                    <button on:click={()=>handleAllbet(1)} class={`tabs-nav ${is_allbet && "is-active"}`}>All Bets</button>
-                    <button on:click={()=>handleAllbet(2)} class={`tabs-nav ${is_mybet && "is-active"}`}>My Bets</button>
-                    <button on:click={()=>handleAllbet(3)} class={`tabs-nav ${is_contest && "is-active"}`}>Contest</button>
-                    {#if is_allbet}
-                    <div class="bg" style={`left: 0%; right: 66.6667%;`}></div>
-                    {:else if is_mybet}
-                    <div class="bg" style="left: 33.3333%; right: 33.3333%;"></div>
-                    {:else if is_contest}
-                    <div class="bg" style="left: 66.6667%; right: 0%;"></div>
-                   {/if}
-                </div>
+        </div>
+
+        <div class="sc-cxpSdN kQfmQV tabs game-tabs len-3">
+            <div class="tabs-navs">
+                <button on:click={()=>handleAllbet(1)} class={`tabs-nav ${is_allbet && "is-active"}`}>All Bets</button>
+                <button on:click={()=>handleAllbet(2)} class={`tabs-nav ${is_mybet && "is-active"}`}>My Bets</button>
+                <button on:click={()=>handleAllbet(3)} class={`tabs-nav ${is_contest && "is-active"}`}>Contest</button>
                 {#if is_allbet}
-                    <Allbet />
-                    {:else if is_mybet}
-                    <Mybet />
+                <div class="bg" style={`left: 0%; right: 66.6667%;`}></div>
+                {:else if is_mybet}
+                <div class="bg" style="left: 33.3333%; right: 33.3333%;"></div>
+                {:else if is_contest}
+                <div class="bg" style="left: 66.6667%; right: 0%;"></div>
                 {/if}
             </div>
-    
-            <div class="sc-knKHOI cFxmZX">
-              <div class="intro-title">
-                <p>Classic Dice</p>
-                <div class="intro-tags">
-                  <p>Our Best Games</p>
-                  <p>BC Originals</p>
-                  <p>Recommended Games</p>
-                  <p>Dice</p>
-                </div>
-              </div>
-              <div class="description">Classic Dice, a probability game established by blockchain hash value calculation and algorithm, provides more fun with bet and prediction, in which the closer the number rolled by players to the random number, the higher the probability winning.</div>
-              <button class="intro-detail">
-                Details
-                <span style="margin-left: 1.125rem;">
-                  <Icon src={RiSystemArrowDropRightLine}  size="23"  color="rgba(153, 164, 176, 0.6)"  />
-                </span>
-              </button>
+            {#if is_allbet}
+                <Allbet />
+                {:else if is_mybet}
+                <Mybet />
+            {/if}
+        </div>
+
+        <div class="sc-knKHOI cFxmZX">
+            <div class="intro-title">
+            <p>Classic Dice</p>
+            <div class="intro-tags">
+                <p>Our Best Games</p>
+                <p>BC Originals</p>
+                <p>Recommended Games</p>
+                <p>Dice</p>
             </div>
+            </div>
+            <div class="description">Classic Dice, a probability game established by blockchain hash value calculation and algorithm, provides more fun with bet and prediction, in which the closer the number rolled by players to the random number, the higher the probability winning.</div>
+            <button class="intro-detail">
+            Details
+            <span style="margin-left: 1.125rem;">
+                <Icon src={RiSystemArrowDropRightLine}  size="23"  color="rgba(153, 164, 176, 0.6)"  />
+            </span>
+            </button>
         </div>
     </div>
 </div>
@@ -227,6 +225,13 @@ const handleSoundState = (()=>{
     background-color: var(--background-color);
     width: 100%;
     height: 100vh;
+}
+.lmWKWf.is-open{
+    padding-left: 50px;
+}
+
+.lmWKWf.is-chat{
+    padding-right: 360px;
 }
 .tdthuy {
     display: flex;

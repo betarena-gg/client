@@ -252,7 +252,7 @@
           <img
             class="coin-icon"
             alt=""
-            src="https://res.cloudinary.com/dxwhz3r81/image/upload/v1697828376/ppf_logo_ntrqwg.png"
+            src="https://nanogames.io/coin/BTC.black.png"
           />
         {/if}
         <div class="sc-kDTinF bswIvI button-group">
@@ -316,7 +316,7 @@
           <img
             class="coin-icon"
             alt=""
-            src="https://res.cloudinary.com/dxwhz3r81/image/upload/v1697828376/ppf_logo_ntrqwg.png"
+            src="https://nanogames.io/coin/BTC.black.png"
           />
         {/if}
       </div>

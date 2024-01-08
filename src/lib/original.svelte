@@ -26,20 +26,20 @@
         route: "classic-dice",
         isAtive: $routes.route === "/(games)/classic-dice",
       },
-      {
-        id: 3,
-        name: "Plinko",
-        icon: IoDice,
-        route: "plinko",
-        isAtive: $routes.route === "/(games)/plinko",
-      },
-      {
-        id: 4,
-        name: "Tower",
-        icon: IoDice,
-        route: "tower",
-        isAtive: $routes.route === "/(games)/tower",
-      },
+      // {
+      //   id: 3,
+      //   name: "Plinko",
+      //   icon: IoDice,
+      //   route: "plinko",
+      //   isAtive: $routes.route === "/(games)/plinko",
+      // },
+      // {
+      //   id: 4,
+      //   name: "Tower",
+      //   icon: IoDice,
+      //   route: "tower",
+      //   isAtive: $routes.route === "/(games)/tower",
+      // },
       {
         id: 5,
         name: "HiLo",
@@ -47,13 +47,13 @@
         route: "hilo",
         isAtive: $routes.route === "/(games)/hilo",
       },
-      {
-        id: 6,
-        name: "Diamonds",
-        icon: IoDice,
-        route: "diamonds",
-        isAtive: $routes.route === "/(games)/diamonds",
-      },
+      // {
+      //   id: 6,
+      //   name: "Diamonds",
+      //   icon: IoDice,
+      //   route: "diamonds",
+      //   isAtive: $routes.route === "/(games)/diamonds",
+      // },
       {
         id: 7,
         name: "Mines",
@@ -61,13 +61,13 @@
         route: "mines",
         isAtive: $routes.route === "/(games)/mines",
       },
-      {
-        id: 8,
-        name: "Keno",
-        icon: IoDice,
-        route: "keno",
-        isAtive: $routes.route === "/(games)/keno",
-      },
+      // {
+      //   id: 8,
+      //   name: "Keno",
+      //   icon: IoDice,
+      //   route: "keno",
+      //   isAtive: $routes.route === "/(games)/keno",
+      // },
     ];
   }
 

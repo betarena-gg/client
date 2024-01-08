@@ -19,8 +19,9 @@ import cr from "$lib/games/ClassicDice/audio/click.wav"
 import Allbet from "$lib/games/ClassicDice/componets/allbet.svelte";
 import Mybet from "$lib/games/ClassicDice/componets/mybet.svelte";
 import LiveStats from "$lib/games/ClassicDice/componets/liveStats.svelte";
-import Help from "../crash/help.svelte";
+import Help from "../crash-ell/help.svelte";
 import SeedSetting from "$lib/games/ClassicDice/componets/seedSetting.svelte";
+import { screen, is_open__Appp, is_open__chat } from "$lib/store/screen";
 
 
 let rangeEl = 50
@@ -189,15 +190,12 @@ const handleSoundState = (()=>{
     }
 })
 
-
-
  
 </script>
 
 {#if hisQQ}
 <HistoryDetails on:close={handleDiceHistoryDetail} DgII={DgII} />
 {/if}
-
 
 <!-- {#if is_stats} -->
   <!-- <LiveStats on:close={stats} /> -->
@@ -211,166 +209,171 @@ const handleSoundState = (()=>{
 <Help on:close={handleIsHelp} />
 {/if}
 
-
-<div class="sc-lhMiDA ePAxUv" style="opacity: 1; transform: none;">
-   <div id="game-ClassicDice" class="sc-haTkiu glMLZr game-style-mobile sc-gDGHff gYWFhf">
-        <div class="game-area">
-            <div class="game-main"> 
-                <div class="game-view">
-                    <div class="sc-hoHwyw fIoiVG game-recent ">
-                        <div class="recent-list-wrap">
-                            <div class="recent-list" style="width: 133.333%;">
-                            {#if $handleisLoggin}
-                                {#if $dice_history.length !== 0}
-                                {#each $dice_history as dice}
-                                <button on:click={()=> handleDiceHistoryDetail(dice)} class="recent-item" style="width: 20%;">
-                                    <div class={`item-wrap ${dice.has_won ? "is-win" : "is-lose"} `}>{(parseFloat(dice.cashout)).toFixed(2)}</div>
-                                </button>
-                                {/each} 
-                                {:else}
-                                <div class="empty-item">
-                                    <p>Game results will be displayed here.</p>
-                                </div>
-                                {/if}
-                                {:else}
-                                <div class="empty-item">
-                                    <p>Game results will be displayed here.</p>
-                                </div>
+<div id="game-ClassicDice" class={`sc-haTkiu glMLZr game-style-mobile sc-gDGHff gYWFhf ${$is_open__Appp && `is-open`} ${$is_open__chat && `is-chat`}`}>
+    <div class="game-area">
+        <div class="game-main"> 
+            <div class="game-view">
+                <div class="sc-hoHwyw fIoiVG game-recent ">
+                    <div class="recent-list-wrap">
+                        <div class="recent-list" style="width: 133.333%;">
+                        {#if $handleisLoggin}
+                            {#if $dice_history.length !== 0}
+                            {#each $dice_history as dice}
+                            <button on:click={()=> handleDiceHistoryDetail(dice)} class="recent-item" style="width: 20%;">
+                                <div class={`item-wrap ${dice.has_won ? "is-win" : "is-lose"} `}>{(parseFloat(dice.cashout)).toFixed(2)}</div>
+                            </button>
+                            {/each} 
+                            {:else}
+                            <div class="empty-item">
+                                <p>Game results will be displayed here.</p>
+                            </div>
                             {/if}
-                        </div>
+                            {:else}
+                            <div class="empty-item">
+                                <p>Game results will be displayed here.</p>
+                            </div>
+                        {/if}
                     </div>
+                </div>
+                </div>
+                <div class="sc-hcupDf dqwCNK game-box sc-jwQYvw fPOrXr">
+                    <div class="sc-gLDmcm gnjHQb">
+                        <span>House Edge 1%</span>
                     </div>
-                    <div class="sc-hcupDf dqwCNK game-box sc-jwQYvw fPOrXr">
-                        <div class="sc-gLDmcm gnjHQb">
-                            <span>House Edge 1%</span>
-                        </div>
 
-                        <div class="game-slider ">
-                            <div class="slider-wrapper">
-                                <div class="slider-handles">
-                                    {#if ishover}
-                                    <div class="slider-tip" style={`left: ${ $rollunder ? $betPosition - 5 : 100 - $betPosition - 5 }%;`}>{(parseFloat($range)).toFixed(0)}</div>
+                    <div class="game-slider ">
+                        <div class="slider-wrapper">
+                            <div class="slider-handles">
+                                {#if ishover}
+                                <div class="slider-tip" style={`left: ${ $rollunder ? $betPosition - 5 : 100 - $betPosition - 5 }%;`}>{(parseFloat($range)).toFixed(0)}</div>
+                                {/if}
+                                <input disabled={$Handles_alive} type="range" on:mouseenter={()=>handleRangl(1)} on:mouseleave={()=>handleRangl(2)} min="2" max="98" step="1" class="drag-block "  on:input={(e)=> handleChange(e.target.value)} bind:value={$range}>
+                                <div class="slider-track " style={`transform: translate(${$HandleDicePoint}%, 0px);`}>
+                                    {#if parseFloat($HandleDicePoint) === 50}
+                                    <div class="dice_num ">{(parseFloat($HandleDicePoint)).toFixed(2)}</div>
+                                    {:else}
+                                        <div style={`color: ${$HandleHas_won ? "rgb(67, 179, 9)" : "rgb(237, 99, 0)"};`} class="dice_num ">{(parseFloat($HandleDicePoint)).toFixed(2)}</div>
                                     {/if}
-                                    <input disabled={$Handles_alive} type="range" on:mouseenter={()=>handleRangl(1)} on:mouseleave={()=>handleRangl(2)} min="2" max="98" step="1" class="drag-block "  on:input={(e)=> handleChange(e.target.value)} bind:value={$range}>
-                                    <div class="slider-track " style={`transform: translate(${$HandleDicePoint}%, 0px);`}>
-                                        {#if parseFloat($HandleDicePoint) === 50}
-                                        <div class="dice_num ">{(parseFloat($HandleDicePoint)).toFixed(2)}</div>
-                                        {:else}
-                                            <div style={`color: ${$HandleHas_won ? "rgb(67, 179, 9)" : "rgb(237, 99, 0)"};`} class="dice_num ">{(parseFloat($HandleDicePoint)).toFixed(2)}</div>
-                                        {/if}
-                                        <div class={`dice_png ${$HandleHas_won ? "dice-animate" : ""}`}>
-                                            <img alt="dice.png" src="https://static.nanogames.io/assets/dice.1007262a.png">
-                                        </div>
-                                    </div>
-                                    <div class="slider-line ">
-                                        <div class={ $rollunder ? "slide-win" : "slide-lose"} style={`width: ${$rollunder ? $betPosition : 100 - $betPosition }%;`}></div>
-                                        <div class={$rollunder ? "slide-lose" : "slide-win"} style={`width: ${$rollunder ? 100 - $betPosition : $betPosition}%;`}></div>
-                                        <div class="slider-sign" style={`transform: translate(${$HandleDicePoint}%, 0px);`}>
-                                            <div class="sign"></div>
-                                        </div>
+                                    <div class={`dice_png ${$HandleHas_won ? "dice-animate" : ""}`}>
+                                        <img alt="dice.png" src="https://static.nanogames.io/assets/dice.1007262a.png">
                                     </div>
                                 </div>
-                                <div class="slider-mark">
-                                    <span class="mark">0</span>
-                                    <span class="mark">25</span>
-                                    <span class="mark">50</span>
-                                    <span class="mark">75</span>
-                                    <span class="mark">100</span>
-                                </div>
-                            </div>
-                            <div class="sc-ljMRFG jdrurA">
-                                <div class="sc-ezbkAF gcQjQT input ">
-                                    <div class="input-label">Payout</div>
-                                    <div class="input-control">
-                                        <input type="number" bind:value={$payout}>
-                                        <span class="right-info">x</span>
-                                    </div>
-                                </div>
-                                <div class="sc-ezbkAF gcQjQT input roll-switch">
-                                    <div class="input-label">{ $rollunder ? "Roll Under" : "Roll Over"}</div>
-                                    <button on:click={handleRollUnder} class="input-control">
-                                        <input type="text" readonly value={$betPosition}>
-                                        <span class="right-info">
-                                            <Icon src={AiOutlineSwap}  size="18"  color="rgb(67, 179, 9)"/>
-                                        </span>
-                                    </button>
-                                </div>
-                                <div class="sc-ezbkAF gcQjQT input win-change">
-                                    <div class="input-label">Win Chance</div>
-                                    <div class="input-control">
-                                        <input type="number" min="2" max="98" bind:value={$betPosition}>
-                                        <div class="right-info">
-                                            <span class="right-percent">%</span>
-                                            <button on:click={()=> range.set(2)} class="amount-scale">Min</button>
-                                            <button on:click={()=> range.set($range -5)} class="amount-scale">-5</button>
-                                            <button on:click={()=> range.set($range +5) }  class="amount-scale">+5</button>
-                                            <button on:click={()=> range.set(98)} class="amount-scale">Max</button>
-                                        </div>
+                                <div class="slider-line ">
+                                    <div class={ $rollunder ? "slide-win" : "slide-lose"} style={`width: ${$rollunder ? $betPosition : 100 - $betPosition }%;`}></div>
+                                    <div class={$rollunder ? "slide-lose" : "slide-win"} style={`width: ${$rollunder ? 100 - $betPosition : $betPosition}%;`}></div>
+                                    <div class="slider-sign" style={`transform: translate(${$HandleDicePoint}%, 0px);`}>
+                                        <div class="sign"></div>
                                     </div>
                                 </div>
                             </div>
-                            <svg class="box-bg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 996 46"><defs><linearGradient id="gcardBg" x1="50%" x2="50%" y1="0%" y2="100%"><stop offset="0%" stop-color="#31343C"></stop><stop offset="100%" stop-color="#1E2024" stop-opacity="0"></stop></linearGradient></defs><g opacity=".899"><path fill="url(#gcardBg)" fill-rule="evenodd" d="M0 0h996L892 46H96z" opacity=".598" transform="rotate(-180 498 23)"></path></g></svg>
+                            <div class="slider-mark">
+                                <span class="mark">0</span>
+                                <span class="mark">25</span>
+                                <span class="mark">50</span>
+                                <span class="mark">75</span>
+                                <span class="mark">100</span>
+                            </div>
                         </div>
+                        <div class="sc-ljMRFG jdrurA">
+                            <div class="sc-ezbkAF gcQjQT input ">
+                                <div class="input-label">Payout</div>
+                                <div class="input-control">
+                                    <input type="number" bind:value={$payout}>
+                                    <span class="right-info">x</span>
+                                </div>
+                            </div>
+                            <div class="sc-ezbkAF gcQjQT input roll-switch">
+                                <div class="input-label">{ $rollunder ? "Roll Under" : "Roll Over"}</div>
+                                <button on:click={handleRollUnder} class="input-control">
+                                    <input type="text" readonly value={$betPosition}>
+                                    <span class="right-info">
+                                        <Icon src={AiOutlineSwap}  size="18"  color="rgb(67, 179, 9)"/>
+                                    </span>
+                                </button>
+                            </div>
+                            <div class="sc-ezbkAF gcQjQT input win-change">
+                                <div class="input-label">Win Chance</div>
+                                <div class="input-control">
+                                    <input type="number" min="2" max="98" bind:value={$betPosition}>
+                                    <div class="right-info">
+                                        <span class="right-percent">%</span>
+                                        <button on:click={()=> range.set(2)} class="amount-scale">Min</button>
+                                        <button on:click={()=> range.set($range -5)} class="amount-scale">-5</button>
+                                        <button on:click={()=> range.set($range +5) }  class="amount-scale">+5</button>
+                                        <button on:click={()=> range.set(98)} class="amount-scale">Max</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <svg class="box-bg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 996 46"><defs><linearGradient id="gcardBg" x1="50%" x2="50%" y1="0%" y2="100%"><stop offset="0%" stop-color="#31343C"></stop><stop offset="100%" stop-color="#1E2024" stop-opacity="0"></stop></linearGradient></defs><g opacity=".899"><path fill="url(#gcardBg)" fill-rule="evenodd" d="M0 0h996L892 46H96z" opacity=".598" transform="rotate(-180 498 23)"></path></g></svg>
                     </div>
-                </div>
-
-                <div id="ClassicDice-control-0" class="sc-hLVXRe cYiOHZ game-control style-mobile">
-                    <div class="sc-iwjdpV ikWSlH radio game-control-switch">
-                        <button on:click={()=> handleChangeRoute(1)} class={!isAdvance ? "is-active" : ""}>
-                            <div class="label">Manual</div>
-                        </button>
-                        <button on:click={()=> handleChangeRoute(2)} class={isAdvance ? "is-active" : ""}>
-                            <div class="label">Auto</div>
-                        </button>
-                    </div>
-                    {#if !isAdvance}
-                        <MobileManual />
-                        {:else}
-                        <MobileAuthController />
-                    {/if}
-                </div>
-
-                <div class="game-actions">
-                    <button on:click={()=> handleSoundState()} class={`action-item ${$soundHandler ? "active" : ""} `}>
-                        <Icon src={AiFillSound} size="23"  color={` ${$soundHandler ? "rgb(67, 179, 9)" : "rgba(153, 164, 176, 0.6)"} `} title="Sound" />
-                    </button>
-                    <button on:click={stats} class="action-item ">
-                        <Icon src={BiStats}  size="18"  color="rgb(153, 164, 176)" />
-                    </button>
-                    <button on:click={hanhisSeed} class="action-item " id="set_seed">
-                        <Icon src={BiSolidAlbum}  size="18"  color="rgb(153, 164, 176)" />
-                    </button>
-                    <button on:click={handleIsHelp} class="action-item ">
-                        <Icon src={BsHurricane}  size="18"  color="rgb(153, 164, 176)" />
-                    </button>
                 </div>
             </div>
+
+            <div id="ClassicDice-control-0" class="sc-hLVXRe cYiOHZ game-control style-mobile">
+                <div class="sc-iwjdpV ikWSlH radio game-control-switch">
+                    <button on:click={()=> handleChangeRoute(1)} class={!isAdvance ? "is-active" : ""}>
+                        <div class="label">Manual</div>
+                    </button>
+                    <button on:click={()=> handleChangeRoute(2)} class={isAdvance ? "is-active" : ""}>
+                        <div class="label">Auto</div>
+                    </button>
+                </div>
+                {#if !isAdvance}
+                    <MobileManual />
+                    {:else}
+                    <MobileAuthController />
+                {/if}
+            </div>
+
+            <div class="game-actions">
+                <button on:click={()=> handleSoundState()} class={`action-item ${$soundHandler ? "active" : ""} `}>
+                    <Icon src={AiFillSound} size="23"  color={` ${$soundHandler ? "rgb(67, 179, 9)" : "rgba(153, 164, 176, 0.6)"} `} title="Sound" />
+                </button>
+                <button on:click={stats} class="action-item ">
+                    <Icon src={BiStats}  size="18"  color="rgb(153, 164, 176)" />
+                </button>
+                <button on:click={hanhisSeed} class="action-item " id="set_seed">
+                    <Icon src={BiSolidAlbum}  size="18"  color="rgb(153, 164, 176)" />
+                </button>
+                <button on:click={handleIsHelp} class="action-item ">
+                    <Icon src={BsHurricane}  size="18"  color="rgb(153, 164, 176)" />
+                </button>
+            </div>
         </div>
-    <div class="sc-cxpSdN kQfmQV tabs game-tabs len-3">
-        <div class="tabs-navs">
-            <button on:click={()=>handleTabs(1)} class={`tabs-nav ${isallbet ? "is-active" : ""}`}>All Bets</button>
-            <button on:click={()=>handleTabs(2)} class={`tabs-nav ${ismybet ? "is-active" : ""}`}>My Bets</button>
-            <button on:click={()=>handleTabs(3)} class={`tabs-nav ${iscontest ? "is-active" : ""}`}>Contest</button>
-            {#if isallbet}
-                <div class="bg" style="left: 0%; right: 66.6667%;"></div>
-                {:else if ismybet}
-                <div class="bg" style="left: 33%; right: 33%;"></div>
-                {:else if iscontest}
-                <div class="bg" style="left: 66.6667%; right: 0%;"></div>
-            {/if}
-        </div>
+    </div>
+<div class="sc-cxpSdN kQfmQV tabs game-tabs len-3">
+    <div class="tabs-navs">
+        <button on:click={()=>handleTabs(1)} class={`tabs-nav ${isallbet ? "is-active" : ""}`}>All Bets</button>
+        <button on:click={()=>handleTabs(2)} class={`tabs-nav ${ismybet ? "is-active" : ""}`}>My Bets</button>
+        <button on:click={()=>handleTabs(3)} class={`tabs-nav ${iscontest ? "is-active" : ""}`}>Contest</button>
         {#if isallbet}
-            <Allbet />
+            <div class="bg" style="left: 0%; right: 66.6667%;"></div>
             {:else if ismybet}
-            <Mybet />
+            <div class="bg" style="left: 33%; right: 33%;"></div>
+            {:else if iscontest}
+            <div class="bg" style="left: 66.6667%; right: 0%;"></div>
         {/if}
     </div>
-   </div>
+    {#if isallbet}
+        <Allbet />
+        {:else if ismybet}
+        <Mybet />
+    {/if}
 </div>
+</div>
+
 
 <style>
 .glMLZr.game-style-mobile {
     padding: 0.625rem;
+}
+.glMLZr.is-open{
+    padding-left: 50px;
+}
+
+.glMLZr.is-chat{
+    padding-right: 360px;
 }
 .glMLZr {
     min-height: 90vh;

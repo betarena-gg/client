@@ -10,14 +10,7 @@
 .jVgBRe .top, .jVgBRe .login-top {
     border-bottom: 1px solid transparent;
 }
-.jVgBRe .login-top {
-    display: flex;
-    -webkit-box-align: center;
-    align-items: center;
-    height: 4rem;
-    padding: 0px 0.75rem;
-    position: relative;
-}
+
 .jVgBRe .login-top .logo-wrap {
     margin-right: 1rem;
     margin-top: 0.25rem;
@@ -60,12 +53,7 @@
     width: 6.25rem;
     height: 2.5rem;
 }
-.fnKcEH.button {
-    color: rgb(245, 246, 247);
-    box-shadow: rgba(29, 34, 37, 0.1) 0px 4px 8px 0px;
-    background-color: rgb(67, 179, 9);
-    background-image: conic-gradient(from 1turn, rgb(67, 179, 9), rgb(93, 219, 28));
-}
+
 .cBmlor {
     display: block;
     width: 100%;

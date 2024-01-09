@@ -8,9 +8,8 @@
   import GameHeader from "$lib/games/crash/GameHeader.svelte";
   import LiveBets from "$lib/games/crash/LiveBets.svelte";
   import { crashGame } from "$lib/games/crash/store";
-  import { onMount } from "svelte";
+  import { onDestroy, onMount } from "svelte";
   import CrashGame from "$lib/games/crash/logics/CrashGame";
-  import { screen, is_open__Appp, is_open__chat } from "$lib/store/screen";
 
   $: currentTab = 1;
   $: gameInit = false;
@@ -18,6 +17,7 @@
     if (browser) {
       try {
         const gameInstance = new CrashGame();
+        console.log(gameInstance)
         await gameInstance.initialize();
         crashGame.set(gameInstance);
         gameInit = true;
@@ -26,9 +26,13 @@
       }
     }
   });
+  onDestroy(() => {
+    $crashGame?.deactivate();
+    crashGame.set(null);
+  })
 </script>
 
-<div id="game-crash" class={`sc-haTkiu lmWKWf game-style1 sc-cBIieI ikZPEu ${$is_open__Appp && `is-open`} ${$is_open__chat && `is-chat`}`}>
+<div id="game-crash" class="sc-haTkiu lmWKWf game-style1 sc-cBIieI ikZPEu">
   <GameHeader />
   <div class="game-area">
     <div class="game-main">
@@ -36,7 +40,7 @@
       <GameView />
       <GameActions />
     </div>
-    <LiveBets />
+    <!-- <LiveBets /> -->
   </div>
   <div class="sc-cxpSdN kQfmQV tabs game-tabs len-3">
     <div class="tabs-navs">
@@ -83,20 +87,56 @@
 </div>
 
 <style>
-  .lmWKWf.game-style0,
-  .lmWKWf.game-style1,
-  .lmWKWf.game-style-iframe {
+  .lmWKWf.game-style1{
     max-width: 1368px;
     margin: 0px auto;
     padding: 1.25rem 0.625rem;
-  }
+}  
 
-  .lmWKWf {
-    min-height: 90vh;
-  }
-  .lmWKWf.game-style0 .game-area,
-  .lmWKWf.game-style1 .game-area,
-  .lmWKWf.game-style-iframe .game-area {
+.kQfmQV .tabs-nav.is-active {
+    color: var(--text-5);
+    font-weight: bold;
+}
+
+.kQfmQV .tabs-navs {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    height: 2.25rem;
+    position: relative;
+    border-radius: 1.125rem;
+    background: var(--tab-nav-bg);
+}
+
+.kQfmQV .tabs-nav {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    flex: 1 1 0%;
+    height: 100%;
+    cursor: pointer;
+    white-space: nowrap;
+    width: 100%;
+    z-index: 1;
+}
+
+.kQfmQV .tabs-nav {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    flex: 1 1 0%;
+    height: 100%;
+    cursor: pointer;
+    white-space: nowrap;
+    width: 100%;
+    z-index: 1;
+}
+
+  .lmWKWf.game-style1 .game-area {
     display: flex;
     flex-wrap: wrap;
   }
@@ -108,9 +148,7 @@
     min-height: 47.5rem;
   }
 
-  .lmWKWf.game-style0 .game-main,
-  .lmWKWf.game-style1 .game-main,
-  .lmWKWf.game-style-iframe .game-main {
+  .lmWKWf.game-style1 .game-main{
     display: flex;
     flex-direction: column;
     flex: 1 1 0%;
@@ -138,20 +176,17 @@
     margin-bottom: 0.75rem;
     margin-left: 0.625rem;
     display: inline-flex;
-  }
-
-  .kQfmQV .tabs-navs {
+    margin-right: auto;
+}
+.kQfmQV .tabs-navs {
     display: flex;
     -webkit-box-align: center;
     align-items: center;
     height: 2.25rem;
     position: relative;
     border-radius: 1.125rem;
-    background-color: rgba(49, 52, 60, 0.7);
-  }
-  .lmWKWf .game-tabs .tabs-navs .tabs-nav {
-    width: 5.625rem;
-  }
+    background: var(--tab-nav-bg);
+}
   .kQfmQV .tabs-nav:hover {
     color: rgb(245, 246, 247);
   }
@@ -167,16 +202,19 @@
     white-space: nowrap;
     width: 100%;
     z-index: 1;
-  }
-
-  .kQfmQV .tabs-nav.is-active {
-    color: rgb(245, 246, 247);
+}
+.kQfmQV .tabs-nav.is-active {
+    color: var(--text-5);
     font-weight: bold;
   }
   .kQfmQV .tabs-navs .bg {
     border-radius: 1.125rem;
-    background-color: #c08731;
-    background-image: conic-gradient(from 1turn, #d3aa25, #c08731);
+    background-image: linear-gradient(
+      to left,
+      rgb(85, 89, 102),
+      rgb(85, 89, 102),
+      rgb(88, 174, 20)
+    );
     opacity: 0.4;
     height: 100%;
     position: absolute;
@@ -256,12 +294,5 @@ p {
     width: 1.4em;
     height: 1.4em;
     fill: rgba(153, 164, 176, 0.6);
-}
-.lmWKWf.is-open{
-    padding-left: 50px;
-}
-
-.lmWKWf.is-chat{
-    padding-right: 360px;
 }
 </style>

@@ -9,11 +9,13 @@ import RiFinanceHandCoinFill from "svelte-icons-pack/ri/RiFinanceHandCoinFill";
 import BiChart from "svelte-icons-pack/bi/BiChart";
 import FaSolidDice from "svelte-icons-pack/fa/FaSolidDice";
 import { browser } from '$app/environment';
+import { profileStore } from "$lib/store/profile"
 import AiFillSlackCircle from "svelte-icons-pack/ai/AiFillSlackCircle";
 import RiSystemArrowLeftSLine from "svelte-icons-pack/ri/RiSystemArrowLeftSLine";
 export let DgII
 import {DiceEncription} from '$lib/games/ClassicDice/store/index'
 $: (DgII)
+$: ($profileStore)
 
 import {
     createEventDispatcher
@@ -210,14 +212,15 @@ $:{
                         </div>
                     </div>
                 </div>
-
-                <div class="verify-wrap">
-                    <a href={`https://dppgames.netlify.app/verify/classic-dice/?s=${DgII.server_seed}&c=${DgII.client_seed}&n=${DgII.game_nonce}`} target="_blank"> 
-                        <button  class="sc-iqseJM sc-egiyK cBmlor fnKcEH button button-normal verify-btn">
-                            <div class="button-inner">Verify</div>
-                        </button>
-                    </a>
-                </div>
+                {#if $profileStore.user_id === DgII.user_id}
+                    <div class="verify-wrap">
+                        <a href={`https://dppgames.netlify.app/verify/classic-dice/?s=${DgII.server_seed}&c=${DgII.client_seed}&n=${DgII.game_nonce}`} target="_blank"> 
+                            <button  class="sc-iqseJM sc-egiyK cBmlor fnKcEH button button-normal verify-btn">
+                                <div class="button-inner">Verify</div>
+                            </button>
+                        </a>
+                    </div>
+                {/if}
             </div>
         </div>
         {:else}

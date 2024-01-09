@@ -16,13 +16,23 @@ import UserStore from "./UserStore";
 import WalletManager from "./WalletManager";
 import { ServerURl } from "../../../backendUrl";
 import axios from "axios";
-import { default_Wallet } from "$lib/store/coins"
-function Bn(t) {
-  t = t.slice(0, 13);
-  let e = parseInt(t, 16) / Math.pow(16, 13);
-  (e = parseFloat(e.toPrecision(9))), (e = 99 / (1 - e));
-  const n = Math.floor(e);
-  return Math.max(1, n / 100);
+function Bn(seed) {
+  // t = t.slice(0, 13);
+  // let e = parseInt(t, 16) / Math.pow(16, 13);
+  // (e = parseFloat(e.toPrecision(9))), (e = 99 / (1 - e));
+  // const n = Math.floor(e);
+  // return Math.max(1, n / 100);
+  const nBits = 52; // number of most significant bits to use
+  // 1. r = 52 most significant bits
+  seed = seed.slice(0, nBits / 4);
+  const r = parseInt(seed, 16);
+  // 2. X = r / 2^52
+  let X = r / Math.pow(2, nBits); // uniformly distributed in [0; 1)
+  // 3. X = 99 / (1-X)
+  X = 99 / (1 - X);
+  // 4. return max(trunc(X), 100)
+  const result = Math.floor(X);
+  return Math.max(1, result / 100);
 }
 function Rn(t) {
   return String(CryptoJS.SHA256(t));
@@ -61,9 +71,9 @@ async function currencInfo() {
   return {
     normalBetLimits: [
       {
-        currencyName: "BTC",
-        minAmount: 0.0003,
-        maxAmount: 1,
+        currencyName: "PPL",
+        minAmount: 1,
+        maxAmount: 200,
       },
       {
         currencyName: "USDT",
@@ -71,36 +81,16 @@ async function currencInfo() {
         maxAmount: 200,
       },
       {
-        currencyName: "LTC",
-        minAmount: 0.02,
-        maxAmount: 200,
-      },
-      {
-        currencyName: "DOGE",
-        minAmount: 0.02,
-        maxAmount: 200,
-      },
-      {
-        currencyName: "TRX",
-        minAmount: 0.02,
-        maxAmount: 200,
-      },
-      {
-        currencyName: "ETH",
-        minAmount: 0.02,
-        maxAmount: 200,
-      },
-      {
-        currencyName: "BNB",
-        minAmount: 0.02,
+        currencyName: "PPF",
+        minAmount: 1,
         maxAmount: 200,
       },
     ],
     xbetLimits: [
       {
-        currencyName: "BTC",
-        minAmount: 0.0003,
-        maxAmount: 1,
+        currencyName: "PPL",
+        minAmount: 1,
+        maxAmount: 200,
       },
       {
         currencyName: "USDT",
@@ -108,28 +98,8 @@ async function currencInfo() {
         maxAmount: 200,
       },
       {
-        currencyName: "LTC",
-        minAmount: 0.02,
-        maxAmount: 200,
-      },
-      {
-        currencyName: "DOGE",
-        minAmount: 0.02,
-        maxAmount: 200,
-      },
-      {
-        currencyName: "TRX",
-        minAmount: 0.02,
-        maxAmount: 200,
-      },
-      {
-        currencyName: "ETH",
-        minAmount: 0.02,
-        maxAmount: 200,
-      },
-      {
-        currencyName: "BNB",
-        minAmount: 0.02,
+        currencyName: "PPF",
+        minAmount: 1,
         maxAmount: 200,
       },
     ],
@@ -138,6 +108,7 @@ async function currencInfo() {
 function logError(err) {
   console.log("Error In crash game => ", err);
 }
+
 export default class CrashGame extends BaseGame {
   static MAX_HISTORY = 2e3;
   constructor() {
@@ -204,10 +175,12 @@ export default class CrashGame extends BaseGame {
       setRate: action,
       setHistory: action,
     });
+    this.user = UserStore.getInstance().user;
     reaction(
       () => UserStore.getInstance().user,
       (user) => {
         if (user) {
+          console.log("Setting user", user)
           this.user = user;
         }
       }
@@ -309,7 +282,7 @@ export default class CrashGame extends BaseGame {
 
     this.on("game_end", () => {
       if (!this.betInfo) {
-        this.script.onGameEnd(this.history.slice(-20).reverse());
+        this.script.onGameEnd([...this.history.slice(-20)].reverse());
       }
     });
   }
@@ -386,10 +359,11 @@ export default class CrashGame extends BaseGame {
         this.betInfo && this.setBetInfo({ ...this.betInfo, rate });
         this.emit("escapeSuccess", {
           amount: this.betInfo.bet,
-          odds: this.betInfo.rate / 100,
+          odds: this.betInfo.rate,
           currencyName: this.betInfo.currencyName,
           currencyImage: this.betInfo.currencyImage,
         });
+        WalletManager.getInstance().createDeduction(this.betInfo.bet.mul(rate).add(this.betInfo.bet).negated(), this.betInfo.currencyName);
       }
 
       if (force) {
@@ -430,8 +404,13 @@ export default class CrashGame extends BaseGame {
   }
 
   waitGameStart() {
+    console.log("Waiting game start", this.__instanceID)
     return new Promise((resolve) => {
-      this.once("game_prepare", resolve);
+      this.once("game_prepare", () => {
+        console.log("Game started!!")
+        resolve(0);
+      });
+      console.log("once events of game prep : After", this._events["game_prepare"] , this.__instanceID)
     });
   }
 
@@ -515,8 +494,7 @@ export default class CrashGame extends BaseGame {
 
     if (bet.userId === this.user.userId && !this.betInfo) {
       this.setBetInfo({
-        currencyName: betData.currencyName,
-        currencyImage: betData.currencyImage,
+        ...betData,
         bet: new Decimal(betData.bet),
         rate: 0,
         autoRate: 0,
@@ -535,7 +513,7 @@ export default class CrashGame extends BaseGame {
 
     // console.log("Join Info ", joinResponse);
 
-    this.loadGameHistory();
+    await this.loadGameHistory();
 
     runInAction(() => {
       let status = joinResponse.status;
@@ -633,7 +611,7 @@ export default class CrashGame extends BaseGame {
   addPlayer(players) { 
     players.forEach((player) => {
       if (!this.playersDict[player.userId]) {
-        const bet = player.bet.toNumber(); //ot.amount2locale(t.bet.toNumber(), t.currencyName),
+        const bet = WalletManager.getInstance().amountToLocale(player.bet.toNumber(), player.currencyName);
         const newPlayer = observable({ ...player, ...{ usd: bet } });
         this.playersDict[player.userId] = newPlayer;
         const index = sortedIndexBy(this.players, newPlayer, (t) => -t.usd);
@@ -643,7 +621,8 @@ export default class CrashGame extends BaseGame {
     this.emit("player_change");
   }
 
-  async handleBetCrash(betData, scriptId) {    
+  async handleBetCrash(betData, scriptId) {
+    
     if (!betData) {
       betData = {
         bet: this.amount,
@@ -655,7 +634,11 @@ export default class CrashGame extends BaseGame {
     }
     await this.beforeBetCheck(betData.bet);
     this.setBetInfo(betData);
-    this.txId = WalletManager.getInstance().createStaticDeduction();
+    const deduction = WalletManager.getInstance().createDeduction(
+      betData.bet,
+      betData.currencyName
+    );
+    this.txId = deduction;
     const requestParams = {
       userId: this.user.userId,
       name: this.user.username,
@@ -669,8 +652,10 @@ export default class CrashGame extends BaseGame {
       frontgroundId: this.txId,
     };
     try {
-      return await this.socketRequest("throw-bet", requestParams);
+      await this.socketRequest("throw-bet", requestParams);
+      WalletManager.getInstance().resolveDeduction(this.txId);
     } catch (error) {
+      WalletManager.getInstance().resolveDeduction(this.txId, false);
       this.setBetInfo(null);
       throw error;
     }
@@ -689,7 +674,7 @@ export default class CrashGame extends BaseGame {
     await this.waitGameEnd();
     return (
       (this.betInfo ? this.betInfo.rate : 0) / 100,
-      this.history.slice(-20).reverse()
+      [...this.history.slice(-20)].reverse()
     );
   }
 
@@ -760,7 +745,6 @@ export default class CrashGame extends BaseGame {
     this.setHistory(
       this.history.concat(newGames.reverse()).slice(-CrashGame.MAX_HISTORY)
     );
-    
   }
 
   async loadGameHistory() {

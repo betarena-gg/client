@@ -93,7 +93,6 @@ register();
     </div>
 </div>
 
-
 <div id="mobile-screen" class="sc-gFSQbh iDnJIm">
     <div class="sc-jibziO bYDJIH banner gradient-mobile ">
         <div class="gradient-wrap">

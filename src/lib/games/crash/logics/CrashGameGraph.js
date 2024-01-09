@@ -16,7 +16,7 @@ const GameStatus = {
   ENDED: 3,
 };
 
-const DEFAULT_COLORS = ["#FFFFFF", "#FFFFFF", "#AD8605", "#3d444b", "#ed6300"];
+const DEFAULT_COLORS = ["#FFFFFF", "#FFFFFF", "#7322FF", "#3d444b", "#ed6300"];
 function lightenColor(e) {
   e = e.replace(/#/, "");
   var t = parseInt(e, 16);
@@ -30,7 +30,7 @@ export default class CrashGameGraph extends EventEmitter {
 
   static XAxisPlotMinValue = 10000;
   static YAxisSizeMultiplier = 2;
-  static fontFamily = "Roboto Mono";
+  static fontFamily = "Monmono";
   static RenderInterval = 3;
 
   constructor(game, user) {
@@ -224,7 +224,7 @@ export default class CrashGameGraph extends EventEmitter {
 
     if (this.game.status === GameStatus.PROGRESS) {
       this.ctx.fillStyle = this.colors[0];
-      this.ctx.font = `bold ${this.fontSizePx(7)} ${CrashGameGraph.fontFamily}`;
+      this.ctx.font = `bold ${this.fontSizePx(8)} ${CrashGameGraph.fontFamily}`;
 
       this.ctx.fillText(
         this.currentGamePayout.toFixed(2) + "×",

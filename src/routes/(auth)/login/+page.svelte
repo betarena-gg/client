@@ -266,7 +266,6 @@
 
 <style>
 
-
   .light-input-control{
     border: 1px solid rgb(233, 234, 242) !important;
     background-color: rgb(245, 246, 250) !important;
@@ -320,20 +319,6 @@
     overflow: clip;
   }
 
-  .fLASqZ {
-    position: absolute;
-    right: 0px;
-    top: 0px;
-    z-index: 11;
-    display: flex;
-    -webkit-box-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    justify-content: center;
-    width: 3.75rem;
-    height: 3.75rem;
-    cursor: pointer;
-  }
 
   .ipnwmW.dialog-body {
     padding: 0px;
@@ -530,13 +515,6 @@
     justify-content: center;
     width: 100%;
     height: 100%;
-  }
-
-  .eWZHfu.button {
-    color: rgb(245, 246, 247);
-    box-shadow: rgba(29, 34, 37, 0.1) 0px 4px 8px 0px;
-    background-color: #c08731;
-    background-image: conic-gradient(from 1turn, #d3aa25, #c08731);
   }
 
   .cBmlor.button-big {

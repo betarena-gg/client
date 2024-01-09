@@ -318,21 +318,6 @@
     overflow: clip;
   }
 
-  .fLASqZ {
-    position: absolute;
-    right: 0px;
-    top: 0px;
-    z-index: 11;
-    display: flex;
-    -webkit-box-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    justify-content: center;
-    width: 3.75rem;
-    height: 3.75rem;
-    transition: 0.5s ease-in-out;
-    cursor: pointer;
-  }
 
   .fLASqZ:hover {
     transition: 0.5s ease-in-out;
@@ -476,10 +461,6 @@
     position: relative;
   }
 
-  .dialog-body > div {
-    flex: 1 1 0%;
-  }
-
   .ceTZhf {
     position: absolute;
     inset: 16.25rem 0px 0px;
@@ -487,14 +468,6 @@
     border-top-left-radius: 1.25rem;
     border-top-right-radius: 1.25rem;
     background-color: rgb(23, 24, 27);
-  }
-
-  .jScFby {
-    box-sizing: border-box;
-    height: 100%;
-    overflow-y: auto;
-    touch-action: pan-y;
-    overscroll-behavior: contain;
   }
 
   .QccSQ {
@@ -525,27 +498,9 @@
     margin-right: 0.625rem;
   }
 
-  .cBmlor > .button-inner {
-    display: flex;
-    -webkit-box-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-  }
-
   .gEBngo.button {
     box-shadow: rgba(29, 34, 37, 0.1) 0px 4px 8px 0px;
     background-color: rgb(107, 113, 128);
-  }
-
-  .jScFby {
-    box-sizing: border-box;
-    height: 100%;
-    overflow-y: auto;
-    touch-action: pan-y;
-    overscroll-behavior: contain;
   }
 
   .ceTZhf {
@@ -627,15 +582,7 @@
     flex: 1 1 0%;
   }
 
-  .cBmlor {
-    display: block;
-    width: 100%;
-    border-radius: 6.25rem;
-    height: 3rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: transform 0.2s cubic-bezier(0.36, 0.66, 0.04, 1) 0s;
-  }
+
 
   .cBmlor.button-big {
     height: 3.625rem;
@@ -645,13 +592,6 @@
     width: 15rem;
     flex: 0 0 auto;
     margin-left: 0.625rem;
-  }
-
-  .fnKcEH.button {
-    color: rgb(245, 246, 247);
-    box-shadow: rgba(29, 34, 37, 0.1) 0px 4px 8px 0px;
-    background-color: #c08731;
-    background-image: conic-gradient(from 1turn, #d3aa25, #c08731);
   }
 
   .cBmlor.button-big {
@@ -673,36 +613,9 @@
     background-color: rgb(49, 52, 60);
   }
 
-  .cBmlor:disabled.sc-iqseJM:not(.is-loading) {
-    opacity: 0.5;
-    cursor: default;
-  }
-
   /* ======================================================= mobile ========================================= */
 
-  .kBjSXI {
-    position: fixed;
-    z-index: 1000;
-    background-color: rgba(0, 0, 0, 0.507);
-    inset: 0px;
-    filter: none !important;
-  }
 
-  .dialog {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    left: 50%;
-    top: 50%;
-    width: 464px;
-    height: 720px;
-    margin: -375px 0px 0px -280px;
-    transition-property: width, height, margin-left, margin-top;
-    transition-duration: 0.5s;
-    border-radius: 1.25rem;
-    overflow: hidden;
-    background-color: rgb(23, 24, 27);
-  }
 
   .dialog-head.has-close {
     margin-right: 3.75rem;
@@ -720,24 +633,6 @@
     transition: all 0.5s ease 0s;
   }
 
-  .fLASqZ {
-    position: absolute;
-    right: 0px;
-    top: 0px;
-    z-index: 11;
-    display: flex;
-    -webkit-box-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    justify-content: center;
-    width: 3.75rem;
-    height: 3.75rem;
-    cursor: pointer;
-  }
-
-  .dialog-body > div {
-    flex: 1 1 0%;
-  }
 
   .dA-dCPD .welcome .msg1 {
     font-size: 1.5rem;
@@ -752,10 +647,6 @@
     position: absolute;
     right: 0px;
     top: -1.875rem;
-  }
-
-  .dialog-body > div {
-    flex: 1 1 0%;
   }
 
   .kDuLvp .input-label {
@@ -794,15 +685,6 @@
     outline: none;
   }
 
-  .cBmlor {
-    display: block;
-    width: 100%;
-    border-radius: 6.25rem;
-    height: 3rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: transform 0.2s cubic-bezier(0.36, 0.66, 0.04, 1) 0s;
-  }
 
   .cBmlor.button-big {
     height: 3.625rem;

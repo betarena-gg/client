@@ -126,7 +126,13 @@ const handleDpojb = (async()=>{
      // if(browser && window.navigator.onLine){
         is_loading = true
         if($handleisLoggin){
-            if( $default_Wallet.coin_name !== "USDT" && $default_Wallet.coin_name !== "PPF"){
+            if( $default_Wallet.coin_name !== "USDT" 
+            && $default_Wallet.coin_name !== "TRX" 
+            && $default_Wallet.coin_name !== "BTC"
+            && $default_Wallet.coin_name !== "BNB"
+            && $default_Wallet.coin_name !== "DOGE"
+            && $default_Wallet.coin_name !== "ETH"
+            && $default_Wallet.coin_name !== "LTC"){
                 error_msg.set("Select another coin")
                 is_loading = false
                 setTimeout(()=>{
@@ -141,34 +147,6 @@ const handleDpojb = (async()=>{
                     error_msg.set('')
                 },4000)
             }  
-            else if( parseFloat($bet_amount) > 5000 && $default_Wallet.coin_name === "USDT"){
-                error_msg.set("Maximum bet amount for USDT is 5000")
-                is_loading = false
-                setTimeout(()=>{
-                    error_msg.set('')
-                },4000)
-            }
-            else if( parseFloat($bet_amount) > 10000 && $default_Wallet.coin_name === "PPF"){
-                error_msg.set("Maximum bet amount for PPF is 10,000")
-                 is_loading = false
-                setTimeout(()=>{
-                    error_msg.set('')
-                },4000)
-            }
-            else if( parseFloat($bet_amount) < 100 && $default_Wallet.coin_name === "PPF"){
-                error_msg.set("Minimum bet amount for PPF is 100")
-                 is_loading = false
-                setTimeout(()=>{
-                    error_msg.set('')
-                },4000)
-            }
-            else if( parseFloat($bet_amount) < 0.20 && $default_Wallet.coin_name === "USDT"){
-                error_msg.set("Minimum bet amount for USDT is 0.20")
-                 is_loading = false
-                setTimeout(()=>{
-                    error_msg.set('')
-                },4000)
-            }
             else{
                 let data = {
                     mines: activeMIne.id,

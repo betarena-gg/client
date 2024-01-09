@@ -16,20 +16,11 @@ import {
     HandleIsAlive,
     HandleWinning
 } from "./store/index"
-import {
-    MinesHistory
-} from "./hook/diceHistory";
-import {
-    handleCountdown
-} from "$lib/games/ClassicDice/socket/index"
-const {
-    handleMinesHistory
-} = handleCountdown()
-const {
-    historyMines
-} = MinesHistory()
-import {
-    onMount
+import { MinesHistory } from "./hook/diceHistory";
+import { handleCountdown } from "$lib/games/ClassicDice/socket/index"
+const { handleMinesHistory} = handleCountdown()
+const { historyMines } = MinesHistory()
+import {   onMount
 } from "svelte";
 import {
     handleAuthToken
@@ -3099,16 +3090,6 @@ onMount(async () => {
     cursor: pointer;
     animation: pull 1s;
 
-}
-
-.fIoiVG .is-lose {
-    color: rgba(153, 164, 176, 0.6);
-    background-color: rgba(122, 128, 140, 0.15);
-}
-
-.fIoiVG .is-win {
-    color: rgb(245, 246, 247);
-    background-color: rgb(67, 179, 9);
 }
 
 .fIoiVG .item-wrap {

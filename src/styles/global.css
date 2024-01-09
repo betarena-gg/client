@@ -89,3 +89,29 @@
     touch-action: pan-y;
     overscroll-behavior: contain;
 }
+
+.cBmlor {
+    display: block;
+    width: 100%;
+    border-radius: 6.25rem;
+    height: 3rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s cubic-bezier(0.36, 0.66, 0.04, 1) 0s;
+  }
+
+.cBmlor:disabled.sc-iqseJM:not(.is-loading) {
+opacity: 0.5;
+cursor: default;
+}
+
+.fIoiVG .is-lose {
+    color: rgba(153, 164, 176, 0.6);
+    background-color: rgba(122, 128, 140, 0.15);
+}
+
+.fIoiVG .is-win {
+    color: rgb(245, 246, 247);
+    background-color: #c08731;
+    background-image: conic-gradient(from 1turn, #d3aa25, #c08731);
+}

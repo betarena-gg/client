@@ -38,15 +38,15 @@ let Handlemax_profit_tips = ((e)=>{
 })
 
 let wining_amount = '' ;
-let bet_amount
+$: bet_amount = 0
 onMount(()=>{
-    if($default_Wallet.coin_name === "USDT"){
+  console.log($default_Wallet.coin_name)
+  if($default_Wallet.coin_name === "TRX"){
     bet_amount = (0.20).toFixed(4)
 }else{
     bet_amount = (100).toFixed(4)
 }
 })
-
 
 
 $:{
@@ -126,7 +126,8 @@ $:{
         setTimeout(() => {
           error_msg.set("");
         }, 4000);
-      } else {
+      }
+       else {
         let data = {
           user_id: $profileStore.user_id,
           server_seed: $DiceEncription.server_seed,

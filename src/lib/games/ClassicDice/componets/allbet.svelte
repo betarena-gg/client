@@ -2,7 +2,7 @@
 import { dicegameplays} from "../store/index"
 import HistoryDetails from "./historyDetails.svelte";
 
-let newItem;
+$: newItem = []
  $: {
     // $crash_historyEl.sort((a, b) => b._id - a._id);
     newItem =  [...$dicegameplays].reverse()

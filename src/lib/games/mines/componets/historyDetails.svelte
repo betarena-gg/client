@@ -24,6 +24,7 @@ const handleCloseHelp = (() => {
     dispatch("close", 5)
 })
 
+
 let hasSharedBet = false
 let handleSharedBet = (() => {
     hasSharedBet = !hasSharedBet
@@ -45,30 +46,30 @@ function formatTime(timestamp) {
 }
 
 let dataSjj ;
-let is_loading = true
-const handleDetals = (async()=>{
-    is_loading = true
-    await axios.post(`${URL}/api/user/mine-game/detailed-history`,{
-        data: DgII
-    },{
-    headers:{
-        Authorization: `Bearer ${$handleAuthToken}`
-    }})
-    .then((res)=>{
-        dataSjj = res.data[0]
-        is_loading = false
-    })
-    .catch((error)=>{
-        is_loading = false
-        console.log(error.response)
-    })
-})
+let is_loading = false
+// const handleDetals = (async()=>{
+//     is_loading = true
+//     await axios.post(`${URL}/api/user/mine-game/detailed-history`,{
+//         data: DgII
+//     },{
+//     headers:{
+//         Authorization: `Bearer ${$handleAuthToken}`
+//     }})
+//     .then((res)=>{
+//         dataSjj = res.data[0]
+//         is_loading = false
+//     })
+//     .catch((error)=>{
+//         is_loading = false
+//         console.log(error.response)
+//     })
+// })
 
-onMount(async()=>{
-    await handleDetals()
-})
+// onMount(async()=>{
+//     await handleDetals()
+// })
 
-let is_mobile = false
+$: is_mobile = false
 $:{
     if (browser && window.innerWidth < 650) {
         is_mobile = true
@@ -105,7 +106,7 @@ $:{
         <div class="dialog-body default-style " style="z-index: 2; transform: none;">
             <div class="sc-dkPtRN jScFby scroll-view sc-bvFjSx jGQOsZ">
                 <div class="sc-emDsmM Osnbt">
-                    {#if !dataSjj.has_won}
+                    {#if !DgII.has_won}
                     <img class="win-state" alt="" src="https://static.nanogames.io/assets/lose.b4ff48b7.png">
                     {:else}
                     <img class="win-state" alt="" src="https://static.nanogames.io/assets/win.431b83d6.png">
@@ -116,14 +117,14 @@ $:{
                         </button>
                     </div>
                     <div class="rt_info">
-                        <img class="avatar avatar" alt="" src={dataSjj.profile_img}>
-                        <div class="name">{dataSjj.username}</div>
+                        <img class="avatar avatar" alt="" src={DgII.profile_img}>
+                        <div class="name">{DgII.username}</div>
                         <div class="flex">
-                            <div class="betid">Betting ID: {dataSjj.game_id}</div>
+                            <div class="betid">Betting ID: {DgII.game_id}</div>
                             <div class="verified">Verified</div>
                         </div>
                     </div>
-                    <div class="rt_time">{formatTime(dataSjj.time)}</div>
+                    <div class="rt_time">{formatTime(DgII.time)}</div>
                     <div class="rt_items">
                         <div class="item-wrap">
                             <div class="label flex-center">
@@ -132,7 +133,7 @@ $:{
                                 </span>
                                 Amount
                             </div>
-                            <div class="number flex-center">{parseFloat(dataSjj.bet_amount)} {dataSjj.bet_token_name}</div>
+                            <div class="number flex-center">{parseFloat(DgII.bet_amount)} {DgII.bet_token_name}</div>
                         </div>
                         <div class="item-wrap">
                             <div class="label flex-center">
@@ -141,7 +142,7 @@ $:{
                                 </span>
                                 Payout
                             </div>
-                            <div class="number flex-center">{(parseFloat(dataSjj.cashout)).toFixed(2)} x</div>
+                            <div class="number flex-center">{(parseFloat(DgII.cashout)).toFixed(2)} x</div>
                         </div>
                         <div class="item-wrap">
                             <div class="label flex-center">
@@ -150,7 +151,7 @@ $:{
                                 </span>
                                 Profit
                             </div>
-                            <div class="number flex-center">{(parseFloat(dataSjj.profit) - parseFloat(dataSjj.bet_amount)).toFixed(4)} {dataSjj.bet_token_name}</div>
+                            <div class="number flex-center">{(parseFloat(DgII.profit) - parseFloat(DgII.bet_amount)).toFixed(4)} {DgII.bet_token_name}</div>
                         </div>
                     </div>
                 </div>
@@ -160,12 +161,12 @@ $:{
                 
                 
                 <div class="sc-eZKLwX gzyxPX">
-                    {#each dataSjj.gameLoop as loop}
+                    {#each DgII.gameLoop as loop}
                     <div class="result-item">
                         {#if loop.active}
                             <div class="gems"></div>
                         {/if}
-                        {#if loop.mine && !dataSjj.has_won}
+                        {#if loop.mine && !DgII.has_won}
                             <div class="mines"></div>
                         {/if}
                     </div>
@@ -187,27 +188,27 @@ $:{
                             </div>
                         </div>
                         <div class="input-control">
-                            <input type="text" readonly value={dataSjj.server_seed}>
+                            <input type="text" readonly value={DgII.server_seed}>
                         </div>
                     </div>
                     <div class="col">
                         <div class="sc-ezbkAF kDuLvp input ">
                             <div class="input-label">Client Seed</div>
                             <div class="input-control">
-                                <input type="text" readonly value={dataSjj.client_seed}>
+                                <input type="text" readonly value={DgII.client_seed}>
                             </div>
                         </div>
                         <div class="sc-ezbkAF kDuLvp input ">
                             <div class="input-label">nonce</div>
                             <div class="input-control">
-                                <input type="number" readonly value={dataSjj.game_nonce}>
+                                <input type="number" readonly value={DgII.game_nonce}>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="verify-wrap">
-                    <a href={`https://dppgames.netlify.app/verify/classic-dice/?s=${dataSjj.server_seed}&c=${dataSjj.client_seed}&n=${dataSjj.game_nonce}`} target="_blank"> 
+                    <a href={`https://dppgames.netlify.app/verify/classic-dice/?s=${DgII.server_seed}&c=${DgII.client_seed}&n=${DgII.game_nonce}`} target="_blank"> 
                         <button  class="sc-iqseJM sc-egiyK cBmlor fnKcEH button button-normal verify-btn">
                             <div class="button-inner">Verify</div>
                         </button>
@@ -237,13 +238,6 @@ $:{
 </div>
 
 <style>
-.kBjSXI {
-    position: fixed;
-    z-index: 1000;
-    inset: 0px;
-    background-color: rgba(0, 0, 0, 0.7);
-    filter: none !important;
-}
 
 .dialog-head.has-close {
     margin-right: 3.75rem;
@@ -287,20 +281,6 @@ $:{
     align-items: center;
     color: rgb(245, 246, 247);
 }
-.fLASqZ {
-    position: absolute;
-    right: 0px;
-    top: 0px;
-    z-index: 11;
-    display: flex;
-    -webkit-box-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    justify-content: center;
-    width: 3.75rem;
-    height: 3.75rem;
-}
-
 .default-style {
     padding-top: 3.75rem;
     background-color: rgb(23, 24, 27);
@@ -317,19 +297,11 @@ $:{
     background-color: rgb(30, 32, 36);
     padding: 1.25rem 1.25rem 0px;
 }
-.dialog-body > div {
-    flex: 1 1 0%;
-}
+
 .jGQOsZ {
     position: relative;
 }
-.jScFby {
-    box-sizing: border-box;
-    height: 100%;
-    overflow-y: auto;
-    touch-action: pan-y;
-    overscroll-behavior: contain;
-}
+
 .Osnbt {
     position: relative;
 }
@@ -522,21 +494,7 @@ $:{
     height: 3.5rem;
     margin: 1.25rem auto 0px;
 }
-.fnKcEH.button {
-    color: rgb(245, 246, 247);
-    box-shadow: rgba(29, 34, 37, 0.1) 0px 4px 8px 0px;
-    background-color: rgb(67, 179, 9);
-    background-image: conic-gradient(from 1turn, rgb(67, 179, 9), rgb(93, 219, 28));
-}
-.cBmlor > .button-inner {
-    display: flex;
-    -webkit-box-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-}
+
 
 .gzyxPX {
     display: grid;

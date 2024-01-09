@@ -142,11 +142,13 @@
             </a>
             <button on:mouseenter={()=> profileNAV = true} on:mouseleave={()=> profileNAV = false} class="svg">
               <Icon src={AiOutlineMenuUnfold} size="23" color={"rgba(153, 164, 176, 0.8)"} className="custom-icon" />
+              {#if profileNAV}
+                <Navprofile />
+              {/if}
             </button>
+         
           </div>
-          {#if profileNAV}
-            <Navprofile />
-          {/if}
+        
         </div>
         <!-- <button class="sc-dcgwPl bbYXSv private-chat">
           <Icon src={HiSolidMail} size="23" color={"rgba(153, 164, 176, 0.8)"} className="custom-icon" />

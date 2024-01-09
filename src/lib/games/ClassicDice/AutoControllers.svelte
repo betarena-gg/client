@@ -30,7 +30,7 @@ let walletRange = 0
 let x = 0;
 
 onMount(()=>{
-    if($default_Wallet.coin_name === "USDT"){
+    if($default_Wallet.coin_name === "TRX"){
             handlediceAutoInput.set((0.20).toFixed(4))
     }else{
         handlediceAutoInput.set((100).toFixed(4))
@@ -109,6 +109,14 @@ const handleAutoStart = (()=>{
         Autopre_bal.set(prev_bal)
         is_Looping = true
         yu = setInterval(()=>{
+        if(parseFloat($handlediceAutoInput) > parseFloat($default_Wallet.balance)){
+            error_msg.set("insufficient balance")
+            is_Looping = false
+            clearInterval(yu)
+            setTimeout(()=>{
+                error_msg.set("")
+            },4000)
+        }else{
             if(bet_number){
                 if(bet_number < bet_num_count){
                     is_Looping = false
@@ -143,6 +151,8 @@ const handleAutoStart = (()=>{
             else{
                 handleRollSubmit()
             }
+        }
+
         }, turbo)
     }else{
         is_Looping = false

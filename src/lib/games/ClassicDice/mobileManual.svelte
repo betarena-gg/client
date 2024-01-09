@@ -40,7 +40,6 @@ let Handlemax_profit_tips = ((e)=>{
 let wining_amount = '' ;
 $: bet_amount = 0
 onMount(()=>{
-  console.log($default_Wallet.coin_name)
   if($default_Wallet.coin_name === "TRX"){
     bet_amount = (0.20).toFixed(4)
 }else{

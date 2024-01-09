@@ -9,7 +9,7 @@ import { payout , minesStore, betDetails, Cashout } from "../mines/store/index";
 import { handleAuthToken } from "$lib/store/routes"
 import { handleisLoggin, profileStore } from "$lib/store/profile"
 import { error_msg } from "./store/index"
-import { bet_amount, soundHandler,mine_history,HandleSelectedMine,HandleNextTime,HandleGame_id,
+import { bet_amount,canCashout, soundHandler,mine_history,HandleSelectedMine,HandleNextTime,HandleGame_id,
      MinesEncription,HandleHas_won,HandleMineCount, HandlemineGems,HandleWinning,  HandleIsAlive} from "$lib/games/mines/store/index"
 import axios from "axios";
 import Loader from "$lib/components/loader.svelte";
@@ -303,8 +303,15 @@ const handleDpojb = (async()=>{
         }
 })
 
+$:{
+  if($Cashout > 1){
+    canCashout.set(true)
+  }
+}
+
 
 const handleCashout = (async()=>{
+    canCashout.set(false)
     let data = {
         gamaLoop: $minesStore,
         bet_amount:parseFloat($betDetails.bet_amount),
@@ -537,7 +544,7 @@ const handlesjen = (e) => {
         </div>
         {/if}
         {#if $HandleIsAlive}
-            <button disabled={$Cashout === 1} on:click={handleCashout} class="sc-iqseJM sc-egiyK cBmlor fnKcEH button button-big bet-button">
+            <button disabled={!$canCashout} on:click={handleCashout} class="sc-iqseJM sc-egiyK cBmlor fnKcEH button button-big bet-button">
                 <div class="button-inner">Cash out</div>
             </button>
         {:else}

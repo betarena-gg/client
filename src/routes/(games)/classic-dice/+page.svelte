@@ -192,7 +192,7 @@ const handleSoundState = (()=>{
 {:else}
 <div class="uytutfyh">
     <div class="tdthuy">
-        <img src="https://res.cloudinary.com/dxwhz3r81/image/upload/v1697848286/dpp-favicon-logo_j53rwc.jpg" alt="">
+        <img src="https://res.cloudinary.com/dxwhz3r81/image/upload/v1704517117/logoshort_dey3mt.png" alt="">
     </div>
 </div>
 {/if}

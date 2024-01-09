@@ -16,7 +16,7 @@ import { handleCountdown } from "$lib/games/ClassicDice/socket/index"
 const { handleMinesHistory } = handleCountdown()
 const URL = ServerURl()
 import { handleAuthToken } from "$lib/store/routes"
-import { payout , minesStore, betDetails, Cashout, bet_amount } from "$lib/games/mines/store/index";
+import { payout , minesStore, betDetails, Cashout, bet_amount, canCashout } from "$lib/games/mines/store/index";
 import { soundHandler,mine_history,HandleSelectedMine,HandleNextTime,HandleGame_id,skown,
   MinesEncription,HandleHas_won,HandleMineCount, HandlemineGems,HandleWinning,  HandleIsAlive} from "$lib/games/mines/store/index"
 
@@ -280,8 +280,14 @@ const handleDpojb = (async()=>{
         }
 })
 
+$:{
+  if($Cashout > 1){
+    canCashout.set(true)
+  }
+}
 
 const handleCashout = (async()=>{
+  canCashout.set(false)
     let data = {
         gamaLoop: $minesStore,
         bet_amount:parseFloat($betDetails.bet_amount),
@@ -484,7 +490,7 @@ const handleCashout = (async()=>{
     </div>
     {/if}
     {#if $HandleIsAlive}
-    <button disabled={$Cashout === 1} on:click={handleCashout} class="sc-iqseJM sc-egiyK cBmlor fnKcEH button button-big bet-button">
+    <button disabled={!$canCashout} on:click={handleCashout} class="sc-iqseJM sc-egiyK cBmlor fnKcEH button button-big bet-button">
         <div class="button-inner">Cash out</div>
     </button>
     {:else}

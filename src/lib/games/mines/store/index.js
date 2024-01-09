@@ -75,6 +75,9 @@ export let HandleSelectedMine = writable(SelectedMine)
 let netTile = 0
 export let HandleNextTime = writable(netTile)
 
+let csout = false
+export let canCashout = writable(csout)
+
 let skownEl = [{
     id: 1,
     active: false,

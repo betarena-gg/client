@@ -8,8 +8,8 @@
         newItem =  [...$handleliveHistory].reverse()
     }
     
-    let DgII = ''
-    let hisQQ = false
+    $: DgII = ''
+    $: hisQQ = false
     const handleDiceHistoryDetail = ((data)=>{
         if(hisQQ){
             hisQQ = false

@@ -1595,6 +1595,9 @@ const handleActivemies = (async () => {
                 })
                 HandleSelectedMine.set(inseuy.length)
                 if ($HandleMineCount === 1) {
+                    if ($HandleSelectedMine === 0) {
+                        HandleNextTime.set(1.03)
+                    }
                     if ($HandleSelectedMine === 1) {
                         Cashout.set(1.03)
                         HandleNextTime.set(1.08)
@@ -1696,6 +1699,9 @@ const handleActivemies = (async () => {
                     }
                 }
                 if ($HandleMineCount === 2) {
+                    if ($HandleSelectedMine === 0) {
+                        HandleNextTime.set(1.08)
+                    }
                     if ($HandleSelectedMine === 1) {
                         Cashout.set(1.08)
                         HandleNextTime.set(1.17)
@@ -1768,10 +1774,14 @@ const handleActivemies = (async () => {
                     }
                 }
                 if ($HandleMineCount === 3) {
+                    if ($HandleSelectedMine === 0) {
+                        HandleNextTime.set(1.13)
+                    } 
                     if ($HandleSelectedMine === 1) {
                         Cashout.set(1.13)
                         HandleNextTime.set(1.29)
-                    } else if ($HandleSelectedMine === 2) {
+                    }
+                    else if ($HandleSelectedMine === 2) {
                         Cashout.set(1.29)
                         HandleNextTime.set(1.48)
                     } else if ($HandleSelectedMine === 3) {
@@ -1837,6 +1847,9 @@ const handleActivemies = (async () => {
                 }
 
                 if ($HandleMineCount === 4) {
+                    if ($HandleSelectedMine === 1) {
+                        HandleNextTime.set(1.18)
+                    }
                     if ($HandleSelectedMine === 1) {
                         Cashout.set(1.18)
                         HandleNextTime.set(1.41)
@@ -1914,10 +1927,14 @@ const handleActivemies = (async () => {
                 }
 
                 if ($HandleMineCount === 5) {
+                    if ($HandleSelectedMine === 0) {
+                        HandleNextTime.set(1.24)
+                    }
                     if ($HandleSelectedMine === 1) {
                         Cashout.set(1.24)
                         HandleNextTime.set(1.56)
                     }
+                    
                     if ($HandleSelectedMine === 2) {
                         Cashout.set(1.56)
                         HandleNextTime.set(2.00)
@@ -1996,6 +2013,9 @@ const handleActivemies = (async () => {
                 }
 
                 if ($HandleMineCount === 6) {
+                    if ($HandleSelectedMine === 0) {
+                        HandleNextTime.set(1.30)
+                    }
                     if ($HandleSelectedMine === 1) {
                         Cashout.set(1.30)
                         HandleNextTime.set(1.74)
@@ -2074,6 +2094,9 @@ const handleActivemies = (async () => {
                 }
 
                 if ($HandleMineCount === 7) {
+                    if ($HandleSelectedMine === 0) {
+                        HandleNextTime.set(1.38)
+                    }
                     if ($HandleSelectedMine === 1) {
                         Cashout.set(1.38)
                         HandleNextTime.set(1.94)
@@ -2148,6 +2171,9 @@ const handleActivemies = (async () => {
                 }
 
                 if ($HandleMineCount === 8) {
+                    if ($HandleSelectedMine === 0) {
+                        HandleNextTime.set(1.46)
+                    }
                     if ($HandleSelectedMine === 1) {
                         Cashout.set(1.46)
                         HandleNextTime.set(2.18)
@@ -2218,6 +2244,9 @@ const handleActivemies = (async () => {
                 }
 
                 if ($HandleMineCount === 9) {
+                    if ($HandleSelectedMine === 0) {
+                        HandleNextTime.set(1.55)
+                    }
                     if ($HandleSelectedMine === 1) {
                         Cashout.set(1.55)
                         HandleNextTime.set(2.48)
@@ -2284,6 +2313,9 @@ const handleActivemies = (async () => {
                 }
 
                 if ($HandleMineCount === 10) {
+                    if ($HandleSelectedMine === 0) {
+                        HandleNextTime.set(1.65)
+                    }
                     if ($HandleSelectedMine === 1) {
                         Cashout.set(1.65)
                         HandleNextTime.set(2.83)
@@ -2346,6 +2378,9 @@ const handleActivemies = (async () => {
                 }
 
                 if ($HandleMineCount === 11) {
+                    if ($HandleSelectedMine === 0) {
+                        HandleNextTime.set(1.77)
+                    }
                     if ($HandleSelectedMine === 1) {
                         Cashout.set(1.77)
                         HandleNextTime.set(3.26)
@@ -2404,6 +2439,9 @@ const handleActivemies = (async () => {
                 }
 
                 if ($HandleMineCount === 12) {
+                    if ($HandleSelectedMine === 0) {
+                        HandleNextTime.set(1.90)
+                    }
                     if ($HandleSelectedMine === 1) {
                         Cashout.set(1.90)
                         HandleNextTime.set(3.81)
@@ -2458,6 +2496,9 @@ const handleActivemies = (async () => {
                 }
 
                 if ($HandleMineCount === 13) {
+                    if ($HandleSelectedMine === 0) {
+                        HandleNextTime.set(2.06)
+                    }
                     if ($HandleSelectedMine === 1) {
                         Cashout.set(2.06)
                         HandleNextTime.set(4.50)
@@ -2508,6 +2549,9 @@ const handleActivemies = (async () => {
                 }
 
                 if ($HandleMineCount === 14) {
+                    if ($HandleSelectedMine === 0) {
+                        HandleNextTime.set(2.25)
+                    }
                     if ($HandleSelectedMine === 1) {
                         Cashout.set(2.25)
                         HandleNextTime.set(5.40)
@@ -2554,6 +2598,13 @@ const handleActivemies = (async () => {
                 }
 
                 if ($HandleMineCount === 15) {
+                    if ($HandleSelectedMine === 0) {
+                        HandleNextTime.set(2.75)
+                    }
+                    if ($HandleSelectedMine === 0) {
+                        Cashout.set(2.75)
+                        HandleNextTime.set(8.25)
+                    }
                     if ($HandleSelectedMine === 1) {
                         Cashout.set(2.75)
                         HandleNextTime.set(8.25)
@@ -2596,6 +2647,9 @@ const handleActivemies = (async () => {
                 }
 
                 if ($HandleMineCount === 16) {
+                    if ($HandleSelectedMine === 0) {
+                        HandleNextTime.set(2.75)
+                    }
                     if ($HandleSelectedMine === 1) {
                         Cashout.set(2.75)
                         HandleNextTime.set(8.25)
@@ -2634,6 +2688,9 @@ const handleActivemies = (async () => {
                 }
 
                 if ($HandleMineCount === 17) {
+                    if ($HandleSelectedMine === 0) {
+                        HandleNextTime.set(3.09)
+                    }
                     if ($HandleSelectedMine === 1) {
                         Cashout.set(3.09)
                         HandleNextTime.set(10.61)
@@ -2668,6 +2725,9 @@ const handleActivemies = (async () => {
                 }
 
                 if ($HandleMineCount === 18) {
+                    if ($HandleSelectedMine === 0) {
+                        HandleNextTime.set(3.54)
+                    }
                     if ($HandleSelectedMine === 1) {
                         Cashout.set(3.54)
                         HandleNextTime.set(14.14)
@@ -2698,6 +2758,9 @@ const handleActivemies = (async () => {
                 }
 
                 if ($HandleMineCount === 19) {
+                    if ($HandleSelectedMine === 0) {
+                        HandleNextTime.set(4.13)
+                    }
                     if ($HandleSelectedMine === 1) {
                         Cashout.set(4.13)
                         HandleNextTime.set(19.8)
@@ -2724,6 +2787,9 @@ const handleActivemies = (async () => {
                 }
 
                 if ($HandleMineCount === 20) {
+                    if ($HandleSelectedMine === 0) {
+                        HandleNextTime.set(4.95)
+                    }
                     if ($HandleSelectedMine === 1) {
                         Cashout.set(4.95)
                         HandleNextTime.set(29.70)
@@ -2746,6 +2812,9 @@ const handleActivemies = (async () => {
                 }
 
                 if ($HandleMineCount === 21) {
+                    if ($HandleSelectedMine === 0) {
+                        HandleNextTime.set(6.19)
+                    }
                     if ($HandleSelectedMine === 1) {
                         Cashout.set(6.19)
                         HandleNextTime.set(49.50)
@@ -2764,6 +2833,9 @@ const handleActivemies = (async () => {
                 }
 
                 if ($HandleMineCount === 22) {
+                    if ($HandleSelectedMine === 0) {
+                        HandleNextTime.set(8.24)
+                    }
                     if ($HandleSelectedMine === 1) {
                         Cashout.set(8.24)
                         HandleNextTime.set(99.00)
@@ -2778,6 +2850,9 @@ const handleActivemies = (async () => {
                 }
 
                 if ($HandleMineCount === 23) {
+                    if ($HandleSelectedMine === 0) {
+                        HandleNextTime.set(12.38)
+                    }
                     if ($HandleSelectedMine === 1) {
                         Cashout.set(12.38)
                         HandleNextTime.set(297.00)
@@ -2787,7 +2862,7 @@ const handleActivemies = (async () => {
                     }
                 }
 
-                if ($HandleMineCount === 24) {
+                if ($HandleMineCount === 24) {     
                     if ($HandleSelectedMine === 0) {
                         Cashout.set(1.00)
                         HandleNextTime.set(24.75)
@@ -2817,6 +2892,9 @@ const handleActivemies = (async () => {
 onMount(async () => {
     $handleAuthToken && handleActivemies()
 })
+
+$: console.log($HandleMineCount)
+
 </script>
 
 {#if hisQQ}

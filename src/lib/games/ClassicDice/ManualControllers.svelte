@@ -60,12 +60,13 @@
       audio.play();
     }
   }
-  let history;
+  $: history = []
   $: {
     history = [...$dice_history];
   }
 
-  let non = 0;
+
+  $: non = 0;
   const handleRollSubmit = async () => {
     // if(browser && window.navigator.onLine){
     $soundHandler && playSound(1);

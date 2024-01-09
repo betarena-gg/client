@@ -2996,7 +2996,6 @@ const handleAutoSet = ((erii)=>{
     background-size: 80%;
 }
 
-
 .fIoiVG {
     display: flex;
     -webkit-box-pack: justify;

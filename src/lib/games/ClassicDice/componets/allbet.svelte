@@ -33,7 +33,7 @@ function formatTime(timestamp) {
     <HistoryDetails on:close={handleDiceHistoryDetail} DgII={DgII}/> 
 {/if}
 
-<div id="main" class="tabs-view" style="transform: none;">
+<div id="main-screen" class="tabs-view" style="transform: none;">
     <div class="sc-eZhRLC iycaRo">
         <table class="sc-gWXbKe iUeetX table is-hover">
             <thead>
@@ -97,7 +97,7 @@ function formatTime(timestamp) {
     </div>
 </div>
 
-<div class="mobile">
+<div id="mobile-screen">
     <div class="tabs-view" style="transform: none;">
         <div class="sc-eZhRLC iycaRo">
             <table class="sc-gWXbKe iUeetX table is-hover">

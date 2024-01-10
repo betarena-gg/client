@@ -16,7 +16,7 @@ const GameStatus = {
   ENDED: 3,
 };
 
-const DEFAULT_COLORS = ["#FFFFFF", "#FFFFFF", "#7322FF", "#3d444b", "#ed6300"];
+const DEFAULT_COLORS = ["#FFFFFF", "#FFFFFF", "#AD8605", "#3d444b", "#ed6300"];
 function lightenColor(e) {
   e = e.replace(/#/, "");
   var t = parseInt(e, 16);

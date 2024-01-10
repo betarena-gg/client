@@ -6,6 +6,7 @@
   import { onDestroy, onMount } from "svelte";
   import { crashGameType, crashGame } from "./store";
   import useFormatter from "./hooks/formatter";
+  import { screen, is_open__Appp, is_open__chat } from "$lib/store/screen";
   const { autorun } = connect();
   const { removeTrailingZeros, getSuffix } = useFormatter();
   $: trendBetActive = false;
@@ -73,10 +74,28 @@
       showingMore = false;
     });
   });
+
+  $: newScreen = 0
+  $: {
+    if($is_open__Appp && !$is_open__chat){
+      newScreen = $screen - 240
+    }
+    else if(!$is_open__Appp && $is_open__chat){
+      newScreen = $screen - 432
+    }
+    else if(!$is_open__Appp && !$is_open__chat){
+      newScreen = $screen - 72
+    }
+    else if($is_open__Appp && $is_open__chat){
+      newScreen = $screen - 600
+    }
+  }
+
 </script>
 
-<div class="sc-czvZiG gnytwz">
-  <div class="top">
+<div class="sc-czvZiG gnytwz  {newScreen < 900 ? "mobile-view" : ""}">
+  {#if newScreen > 900}
+    <div class="top">
     <div class="title">All Bets</div>
 
     <div class="flex-middle">
@@ -92,6 +111,8 @@
       </div>
     </div>
   </div>
+  {/if}
+  
   {#if !trendBetActive}
     <div class="sc-eoHXOn vjsVz need-scroll">
       <table class="head">
@@ -419,12 +440,14 @@
 </div>
 
 <style>
-  .gnytwz {
-    background-color: rgb(30, 32, 36);
+  .gnytwz:not(.mobile-view) {
     margin-left: 0.625rem;
-    border-radius: 1.25rem;
     width: 40%;
     max-width: 542px;
+  }
+  .gnytwz {
+    background-color: rgb(30, 32, 36);
+    border-radius: 1.25rem;
     position: relative;
   }
   .gnytwz .top {

@@ -6,6 +6,9 @@
   import TrendDialog from "./dialogs/trends/layout.svelte";
   import CrashInfoDialog from "./dialogs/GameInfoDialog.svelte";
   import { onMount, onDestroy } from "svelte";
+  import Icon from "svelte-icons-pack/Icon.svelte";
+  import AiOutlineMenuUnfold from "svelte-icons-pack/ai/AiOutlineMenuUnfold";
+  import { screen } from "$lib/store/screen"
   const { autorun } = connect();
   import Decimal from "decimal.js";
   import pkg from "lodash";
@@ -70,7 +73,7 @@
     if (!game && _game) {
       game = _game;
       autorun(() => {
-        gameHistory = [...game.history.reverse()].slice(0, 10).reverse();
+        gameHistory = game.history.slice(-10);
         // console.log("Game History", gameHistory);
         if (betsContainer) {
           clearTimeout(scrollTimeout);
@@ -116,6 +119,10 @@
     }
   }
   $: dialogData = null;
+
+
+
+
 </script>
 
 {#if Boolean(dialogData)}
@@ -165,15 +172,12 @@
         {/each}
       </div>
     </div>
-    <button
-      on:click={() => (showTrends = !showTrends)}
-      class="sc-iLOkMM kCvsnZ flex-center"
-      ><svg
-        xmlns:xlink="http://www.w3.org/1999/xlink"
-        class="sc-gsDKAQ hxODWG icon"><use xlink:href="#icon_Trends"></use></svg
-      >
-      <div>Trends</div></button
-    >
+    {#if $screen > 650}
+    <button on:click={() => (showTrends = !showTrends)} class="sc-iLOkMM kCvsnZ flex-center">
+      <Icon src={AiOutlineMenuUnfold} size="20" color={"rgba(153, 164, 176, 0.8)"} className="custom-icon" />
+      <div>Trends</div>
+    </button>
+    {/if}
   </div>
   <div class="sc-hcupDf dqwCNK game-box sc-eZKLwX gcZuwC">
     <div class="sc-gLDmcm gnjHQb house-edge"><span>House Edge 1%</span></div>
@@ -347,47 +351,6 @@
     justify-content: center;
     align-items: center;
   }
-  .kCvsnZ .icon {
-    margin-right: 0.375rem;
-  }
-
-  .hxODWG {
-    width: 1.4em;
-    height: 1.4em;
-    fill: rgba(153, 164, 176, 0.6);
-  }
- 
-  @media only screen and (max-width: 650px){
-    .gcZuwC {
-      position: relative;
-      flex: 1 1 0%;
-      display: flex;
-      flex-direction: column;
-    }
-    .dgiRGq {
-    position: relative;
-    margin-top: 1.875rem;
-    margin-bottom: 1.25rem;
-    height: 100%;
-  }
-  }
-
-  @media only screen and (min-width: 650px){
-    .gcZuwC {
-      position: relative;
-      flex: 1 1 0%;
-      display: flex;
-      flex-direction: column;
-      padding: 0px 1.875rem 1.875rem;
-    }
-    .dgiRGq {
-      position: relative;
-      margin-top: 1.875rem;
-      margin-bottom: 1.25rem;
-      min-height: 300px;
-      height: 100%;
-    }
-  }
 
   .dqwCNK {
     position: relative;
@@ -424,5 +387,37 @@
     right: 0px;
     bottom: -1px;
     width: 100%;
+  }
+  @media only screen and (max-width:650px){
+    .gcZuwC {
+      position: relative;
+      flex: 1 1 0%;
+      display: flex;
+      flex-direction: column;
+    }
+    .dgiRGq {
+      position: relative;
+      margin-top: 1.875rem;
+      margin-bottom: 1.25rem;
+      min-height: 170px;
+      height: 100%;
+    }
+  }
+
+  @media only screen and (min-width:650px){
+    .gcZuwC {
+      position: relative;
+      flex: 1 1 0%;
+      display: flex;
+      flex-direction: column;
+      padding: 0px 1.875rem 1.875rem;
+    }
+    .dgiRGq {
+      position: relative;
+      margin-top: 1.875rem;
+      margin-bottom: 1.25rem;
+      min-height: 300px;
+      height: 100%;
+    }
   }
 </style>

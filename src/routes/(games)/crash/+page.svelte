@@ -1,5 +1,6 @@
 <script>
   import { browser } from "$app/environment";
+  import { screen, is_open__Appp, is_open__chat } from "$lib/store/screen";
   import GameControls from "$lib/games/crash/GameControls.svelte";
   import GameActions from "$lib/games/crash/GameActions.svelte";
   import GameView from "$lib/games/crash/GameView.svelte";
@@ -8,16 +9,34 @@
   import GameHeader from "$lib/games/crash/GameHeader.svelte";
   import LiveBets from "$lib/games/crash/LiveBets.svelte";
   import { crashGame } from "$lib/games/crash/store";
-  import { onDestroy, onMount } from "svelte";
+  import { onMount } from "svelte";
   import CrashGame from "$lib/games/crash/logics/CrashGame";
 
-  $: currentTab = 1;
+
+
+  $: newScreen = 0
+  $: {
+    if($is_open__Appp && !$is_open__chat){
+      newScreen = $screen - 240
+    }
+    else if(!$is_open__Appp && $is_open__chat){
+      newScreen = $screen - 432
+    }
+    else if(!$is_open__Appp && !$is_open__chat){
+      newScreen = $screen - 72
+    }
+    else if($is_open__Appp && $is_open__chat){
+      newScreen = $screen - 600
+    }
+  }
+
+  $: tabOffset = newScreen > 900 ? 0 : 1;
+  $: currentTab = !tabOffset && currentTab === 3 ? 1 : (currentTab || 1);
   $: gameInit = false;
   onMount(async () => {
     if (browser) {
       try {
         const gameInstance = new CrashGame();
-        console.log(gameInstance)
         await gameInstance.initialize();
         crashGame.set(gameInstance);
         gameInit = true;
@@ -26,13 +45,10 @@
       }
     }
   });
-  onDestroy(() => {
-    $crashGame?.deactivate();
-    crashGame.set(null);
-  })
+
 </script>
 
-<div id="game-crash" class="sc-haTkiu lmWKWf game-style1 sc-cBIieI ikZPEu">
+<div id="game-crash" class={`sc-haTkiu lmWKWf game-style1 sc-cBIieI ikZPEu ${$is_open__Appp ? "is_sidebar" : ""} ${$is_open__chat ? "is_chat" : ""}`}>
   <GameHeader />
   <div class="game-area">
     <div class="game-main">
@@ -40,26 +56,37 @@
       <GameView />
       <GameActions />
     </div>
-    <!-- <LiveBets /> -->
+    {#if newScreen > 900}
+    <LiveBets />
+    {/if}
   </div>
   <div class="sc-cxpSdN kQfmQV tabs game-tabs len-3">
     <div class="tabs-navs">
+      {#if Boolean(tabOffset)}
       <button
-        on:click={() => (currentTab = 1)}
-        class="tabs-nav {currentTab === 1 ? 'is-active' : ''}">My Bets</button
+      on:click={() => (currentTab = 1)}
+      class="tabs-nav {currentTab === 1 ? 'is-active' : ''}">All Bets</button
+    >
+      {/if}
+      <button
+        on:click={() => (currentTab = 1 + tabOffset)}
+        class="tabs-nav {currentTab === 1 + tabOffset ? 'is-active' : ''}">My Bets</button
       ><button
-        on:click={() => (currentTab = 2)}
-        class="tabs-nav {currentTab === 2 ? 'is-active' : ''}">History</button
+        on:click={() => (currentTab = 2 + tabOffset)}
+        class="tabs-nav {currentTab === 2 + tabOffset ? 'is-active' : ''}">History</button
       >
       <div
         class="bg"
-        style="width: 50%; left: {currentTab === 2 ? '50%' : '0'};"
+        style="width: {100 /(Boolean(tabOffset) ? 3 : 2)}%; left: {(Boolean(tabOffset) ? (100/3) : 50) * (Boolean(tabOffset) ? (currentTab - tabOffset) : currentTab - 1)}%;"
       ></div>
     </div>
     <div class="tabs-view" style="transform: none;">
-      {#if currentTab === 1}
+      {#if Boolean(tabOffset) && currentTab === 1}
+        <LiveBets/>
+      {/if}
+      {#if currentTab === 1 + tabOffset}
         <MyBets />
-      {:else}
+      {:else if currentTab === 2 + tabOffset}
         <AllBets />
       {/if}
     </div>
@@ -87,56 +114,26 @@
 </div>
 
 <style>
-  .lmWKWf.game-style1{
+  
+  .lmWKWf.game-style1 {
     max-width: 1368px;
     margin: 0px auto;
     padding: 1.25rem 0.625rem;
-}  
+  }
 
-.kQfmQV .tabs-nav.is-active {
-    color: var(--text-5);
-    font-weight: bold;
-}
+  .lmWKWf.is_sidebar {
+    padding-left: 46px;
+  }
 
-.kQfmQV .tabs-navs {
-    display: flex;
-    -webkit-box-align: center;
-    align-items: center;
-    height: 2.25rem;
-    position: relative;
-    border-radius: 1.125rem;
-    background: var(--tab-nav-bg);
-}
+  .lmWKWf.is_chat {
+    padding-right: 370px;
+  }
 
-.kQfmQV .tabs-nav {
-    display: flex;
-    -webkit-box-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    justify-content: center;
-    flex: 1 1 0%;
-    height: 100%;
-    cursor: pointer;
-    white-space: nowrap;
-    width: 100%;
-    z-index: 1;
-}
-
-.kQfmQV .tabs-nav {
-    display: flex;
-    -webkit-box-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    justify-content: center;
-    flex: 1 1 0%;
-    height: 100%;
-    cursor: pointer;
-    white-space: nowrap;
-    width: 100%;
-    z-index: 1;
-}
-
-  .lmWKWf.game-style1 .game-area {
+  .lmWKWf {
+    min-height: 90vh;
+  }
+  
+  .lmWKWf.game-style1 .game-area{
     display: flex;
     flex-wrap: wrap;
   }
@@ -148,7 +145,7 @@
     min-height: 47.5rem;
   }
 
-  .lmWKWf.game-style1 .game-main{
+  .lmWKWf.game-style1 .game-main {
     display: flex;
     flex-direction: column;
     flex: 1 1 0%;
@@ -176,17 +173,20 @@
     margin-bottom: 0.75rem;
     margin-left: 0.625rem;
     display: inline-flex;
-    margin-right: auto;
-}
-.kQfmQV .tabs-navs {
+  }
+
+  .kQfmQV .tabs-navs {
     display: flex;
     -webkit-box-align: center;
     align-items: center;
     height: 2.25rem;
     position: relative;
     border-radius: 1.125rem;
-    background: var(--tab-nav-bg);
-}
+    background-color: rgba(49, 52, 60, 0.7);
+  }
+  .lmWKWf .game-tabs .tabs-navs .tabs-nav {
+    width: 5.625rem;
+  }
   .kQfmQV .tabs-nav:hover {
     color: rgb(245, 246, 247);
   }
@@ -202,9 +202,10 @@
     white-space: nowrap;
     width: 100%;
     z-index: 1;
-}
-.kQfmQV .tabs-nav.is-active {
-    color: var(--text-5);
+  }
+
+  .kQfmQV .tabs-nav.is-active {
+    color: rgb(245, 246, 247);
     font-weight: bold;
   }
   .kQfmQV .tabs-navs .bg {

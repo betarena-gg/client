@@ -8,6 +8,7 @@
   const { removeTrailingZeros, getSuffix } = useFormatter();
   import CrashInfoDialog from "./dialogs/GameInfoDialog.svelte";
   import { crashGame } from "./store";
+  import { screen, is_open__Appp, is_open__chat } from "$lib/store/screen";
   import Decimal from "decimal.js";
   $: myBets = [];
   let game = null;
@@ -22,6 +23,24 @@
   }
 
   $: dialogData = null;
+
+  $: newScreen = 0
+  $: {
+    if($is_open__Appp && !$is_open__chat){
+      newScreen = $screen - 240
+    }
+    else if(!$is_open__Appp && $is_open__chat){
+      newScreen = $screen - 432
+    }
+    else if(!$is_open__Appp && !$is_open__chat){
+      newScreen = $screen - 72
+    }
+    else if($is_open__Appp && $is_open__chat){
+      newScreen = $screen - 600
+    }
+  }
+
+
 </script>
 
 {#if Boolean(dialogData)}
@@ -33,13 +52,20 @@
 <div class="sc-eZhRLC iycaRo">
   {#if Boolean(myBets.length)}
     <table class="sc-gWXbKe iUeetX table is-hover">
-      <thead
-        ><tr
-          ><th class="num">Bet ID</th><th class="time">Time</th><th class="bet"
-            >Bet</th
-          ><th class="payout">Payout</th><th class="profit">Profit</th></tr
-        ></thead
-      ><tbody>
+      <thead>
+        <tr>
+          <th class="num">Bet ID</th>
+          {#if newScreen > 700}
+            <th class="time">Time</th>
+          {/if}
+          {#if newScreen > 400}
+          <th class="bet">Bet</th>
+          {/if}
+          <th class="payout">Payout</th>
+          <th class="profit">Profit</th>
+        </tr>
+      </thead>
+      <tbody>
         {#each myBets as bet, index (`${bet.game_id}_${index}_${bet.betID}`)}
           <tr
             on:click={() => {
@@ -56,9 +82,13 @@
                 }}
                 class="hash ellipsis">{bet.betID}</a
               ></td
-            ><td>{new Date(bet.betTime).toLocaleTimeString()}</td><td
-              class="bet"
-              ><div class="sc-Galmp erPQzq coin notranslate monospace">
+            >
+            {#if newScreen > 700}
+            <td>{new Date(bet.betTime).toLocaleTimeString()}</td>
+            {/if}
+            {#if newScreen > 400}
+            <td class="bet">
+              <div class="sc-Galmp erPQzq coin notranslate monospace">
                 <img alt="" class="coin-icon" src={bet.currencyImage} />
                 <div class="amount">
                   <span class="amount-str"
@@ -68,8 +98,10 @@
                     ></span
                   >
                 </div>
-              </div></td
-            ><td class="payout">{new Decimal(bet.odds).toDP(2).toNumber()}x</td><td
+              </div>
+            </td>
+            {/if}
+              <td class="payout">{new Decimal(bet.odds).toDP(2).toNumber()}x</td><td
               class="profitline {bet.won ? 'is-win' : 'is-lose'}"
               ><div class="sc-Galmp erPQzq coin notranslate monospace has-sign">
                 <img alt="" class="coin-icon" src={bet.currencyImage} />
